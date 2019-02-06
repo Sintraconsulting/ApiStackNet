@@ -1,4 +1,7 @@
-﻿using ApiStackNet.DAL.Model;
+﻿using ApiStackNet.API.Model;
+using ApiStackNet.BLL.Model;
+using ApiStackNet.Core;
+using ApiStackNet.DAL.Model;
 using AutoMapper;
 using Calabonga.PagedListLite;
 using System;
@@ -79,7 +82,7 @@ namespace ApiStackNet.BLL
         }
 
 
-        public virtual bool BulkUpdate(IEnumerable<BO> entityList)
+        public virtual bool BulkSave(IEnumerable<BO> entityList)
         {
             int i = 0;
             foreach (BO entity in entityList)
@@ -157,14 +160,47 @@ namespace ApiStackNet.BLL
             return true;
         }
 
-
-
-        public virtual PagedList<DTO> List(Expression<Func<TEntity,bool>> where, int page,int pageSize)
+        public virtual PagedList<DTO> List( int page, int pageSize)
         {
-            var query = GetQueriable().Where(where);
-          
+            return List(null, page, pageSize, null);
+        }
 
-                int count = query.Count();
+        public virtual PagedList<DTO> List(Expression<Func<TEntity, bool>> where, int page, int pageSize)
+        {
+            return List(where, page, pageSize, null);
+        }
+
+       
+
+        public virtual PagedList<DTO> List(Expression<Func<TEntity,bool>> where, int page,int pageSize, IList<OrderInfo<TEntity>> orderbyList)
+        {
+            var query = GetQueriable();
+            if (where != null)
+            {
+              query=query.Where(where);
+            }
+
+            int count = query.Count();
+
+            //TODO: add sort and default values
+            if (orderbyList != null && orderbyList.Count>0)
+            {
+                int i = 0;
+                foreach (var ob in orderbyList)
+                {
+                    query= SetOrderByClause(query, i, ob);
+                    //query = query.OrderBy(lambda);
+
+                    i++;
+                }
+            }
+            else
+            {
+                //paging require almost 1 sort dimension
+                query = query.OrderBy(x=>x.Id);
+            }
+
+            
             if (page > 0)
             {
                 query = query.Skip(page * pageSize);
@@ -174,6 +210,8 @@ namespace ApiStackNet.BLL
                 query = query.Take(pageSize);
             }
 
+         
+
             var dtos= mapper.Map<List<DTO>>(query.ToList());
 
             var list = new PagedList<DTO>(dtos, page, pageSize, count);
@@ -181,6 +219,34 @@ namespace ApiStackNet.BLL
             return list;
         }
 
+        private static IQueryable<TEntity> SetOrderByClause(IQueryable<TEntity> query, int i, OrderInfo<TEntity> ob)
+        {
 
+            if (i == 0)
+            {
+                if (ob.Direction == OrderByDirection.ASC)
+                {
+                    return QueryHelper.OrderByProperty<TEntity>(query, ob.KeySelector.Member.Name);
+                }
+                else
+                {
+                    return QueryHelper.OrderByPropertyDescending<TEntity>(query, ob.KeySelector.Member.Name);
+                }
+            }
+            else
+            {
+                if (ob.Direction == OrderByDirection.ASC)
+                {
+                    return QueryHelper.ThenOrderByProperty<TEntity>(query, ob.KeySelector.Member.Name);
+                }
+                else
+                {
+                    return QueryHelper.ThenOrderByPropertyDescending<TEntity>(query, ob.KeySelector.Member.Name);
+                }
+            }
+
+           
+        }
+          
     }
 }

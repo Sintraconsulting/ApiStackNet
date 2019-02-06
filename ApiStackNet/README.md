@@ -103,3 +103,17 @@ There is one service for primary key type, naming convention is <PK>DataService,
 
 ## Controller
 
+```json
+{
+  "PageNumber": 1,
+  "PageSize": 10,
+  "Filter": [
+    {
+      "Name": "FieldName",
+      "Comparator": "Equal", 
+      "Value": "true"
+    }
+  ]
+}
+
+```

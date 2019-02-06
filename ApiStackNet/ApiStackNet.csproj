@@ -106,14 +106,20 @@
   <ItemGroup>
     <Compile Include="API\BaseController.cs" />
     <Compile Include="API\DataController.cs" />
+    <Compile Include="API\Model\GenericPagedFilter.cs" />
+    <Compile Include="API\Model\PagedRequest.cs" />
     <Compile Include="API\Model\UIMessage.cs" />
     <Compile Include="API\Model\Metadata.cs" />
     <Compile Include="API\Model\WrappedResponse.cs" />
     <Compile Include="BLL\IDataService.cs" />
     <Compile Include="BLL\Model\BaseDTO.cs" />
+    <Compile Include="BLL\Model\OrderInfo.cs" />
     <Compile Include="BLL\Service\GuidDataService.cs" />
     <Compile Include="BLL\Service\IntDataService.cs" />
     <Compile Include="BLL\Service\StringDataService.cs" />
+    <Compile Include="Core\ConversionHelper.cs" />
+    <Compile Include="Core\PredicateBuilder.cs" />
+    <Compile Include="Core\QueryHelper.cs" />
     <Compile Include="DAL\Model\AuditableEntity.cs" />
     <Compile Include="DAL\Model\BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,8 +129,6 @@
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
