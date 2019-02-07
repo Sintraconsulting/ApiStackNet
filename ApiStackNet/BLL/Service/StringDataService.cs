@@ -25,4 +25,20 @@ namespace ApiStackNet.BLL.Service
         }
     }
 
+
+    public abstract class StringDataService<DTO,  TEntity> : IReadOnlyDataService<DTO,  TEntity, string>
+     where TEntity : BaseEntity<string>
+     where DTO : BaseEntity<string>
+    {
+        public StringDataService(DbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        { }
+
+        protected override TEntity InternalGetById(string Id)
+        {
+            var query = GetQueriable().Where(x => x.Id == Id);
+            var internalItem = query.ToList().SingleOrDefault();
+            return internalItem;
+        }
+    }
+
 }

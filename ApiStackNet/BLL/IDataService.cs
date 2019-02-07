@@ -16,42 +16,31 @@ using System.Threading.Tasks;
 
 namespace ApiStackNet.BLL
 {
-
-
-
-    public abstract class IDataService<DTO, BO, TEntity, PK>
-    where TEntity : AuditableEntity<PK>
-    where BO : BaseEntity<PK>
+    public abstract class IReadOnlyDataService<DTO,  TEntity, PK>
+    where TEntity : BaseEntity<PK>
     where DTO : BaseEntity<PK>
-
     {
-        public virtual int BulkSize { get => 1000; }
-       
 
-        private DbContext dbContext;
-        private IMapper mapper;
+        protected DbContext dbContext;
+        protected IMapper mapper;
 
-        
-        public  IDataService(DbContext dbContext, IMapper mapper)
+        public virtual IQueryable<TEntity> GetQueriable()
         {
-            //TODO: move using DI
-            this.dbContext = dbContext;
-            this.mapper = mapper;
-          
-        }
-
-        public IQueryable<TEntity> GetQueriable()
-        {
-            var query= GetSet().AsQueryable();
+            var query = GetSet().AsQueryable();
 
             if ((typeof(TEntity)).BaseType.Name == "AuditableEntity`1")//TODO: make generic
             {
-                query = query.Where(x => x.Active == true);
+                //   query = query.Where(x => x.Active == true);
+
+                ParameterExpression paramterExpression = Expression.Parameter(typeof(TEntity));
+                var orderByProperty = Expression.Property(paramterExpression, "Id");
+                var lambda = Expression.Lambda<Func<TEntity, bool>>(orderByProperty, paramterExpression);
+                query = Queryable.Where(query, lambda);
             }
             return query;
         }
 
-        public DbSet<TEntity> GetSet()
+        public virtual  DbSet<TEntity> GetSet()
         {
             return dbContext.Set<TEntity>();
         }
@@ -64,6 +53,123 @@ namespace ApiStackNet.BLL
         }
 
         protected abstract TEntity InternalGetById(PK Id);
+
+        public IReadOnlyDataService(DbContext dbContext, IMapper mapper)
+        {
+            //TODO: move using DI
+            this.dbContext = dbContext;
+            this.mapper = mapper;
+
+        }
+
+
+
+        public virtual PagedList<DTO> List(int page, int pageSize)
+        {
+            return List(null, page, pageSize, null);
+        }
+
+        public virtual PagedList<DTO> List(Expression<Func<TEntity, bool>> where, int page, int pageSize)
+        {
+            return List(where, page, pageSize, null);
+        }
+
+
+
+        public virtual PagedList<DTO> List(Expression<Func<TEntity, bool>> where, int page, int pageSize, IList<OrderInfo<TEntity>> orderbyList)
+        {
+            var query = GetQueriable();
+            if (where != null)
+            {
+                query = query.Where(where);
+            }
+
+            int count = query.Count();
+
+            //TODO: add sort and default values
+            if (orderbyList != null && orderbyList.Count > 0)
+            {
+                int i = 0;
+                foreach (var ob in orderbyList)
+                {
+                    query = SetOrderByClause(query, i, ob);
+                    //query = query.OrderBy(lambda);
+
+                    i++;
+                }
+            }
+            else
+            {
+                //paging require almost 1 sort dimension
+                query = query.OrderBy(x => x.Id);
+            }
+
+
+            if (page > 0)
+            {
+                query = query.Skip(page * pageSize);
+            }
+            if (pageSize > 0)
+            {
+                query = query.Take(pageSize);
+            }
+
+
+
+            var dtos = mapper.Map<List<DTO>>(query.ToList());
+
+            var list = new PagedList<DTO>(dtos, page, pageSize, count);
+
+            return list;
+        }
+
+        private static IQueryable<TEntity> SetOrderByClause(IQueryable<TEntity> query, int i, OrderInfo<TEntity> ob)
+        {
+
+            if (i == 0)
+            {
+                if (ob.Direction == OrderByDirection.ASC)
+                {
+                    return QueryHelper.OrderByProperty<TEntity>(query, ob.KeySelector.Member.Name);
+                }
+                else
+                {
+                    return QueryHelper.OrderByPropertyDescending<TEntity>(query, ob.KeySelector.Member.Name);
+                }
+            }
+            else
+            {
+                if (ob.Direction == OrderByDirection.ASC)
+                {
+                    return QueryHelper.ThenOrderByProperty<TEntity>(query, ob.KeySelector.Member.Name);
+                }
+                else
+                {
+                    return QueryHelper.ThenOrderByPropertyDescending<TEntity>(query, ob.KeySelector.Member.Name);
+                }
+            }
+
+
+        }
+    }
+
+
+        public abstract class IDataService<DTO, BO, TEntity, PK>: IReadOnlyDataService<DTO, TEntity, PK>
+    where TEntity : BaseEntity<PK>
+    where BO : BaseEntity<PK>
+    where DTO : BaseEntity<PK>
+    {
+        public virtual int BulkSize { get => 1000; }
+       
+
+
+        
+        public  IDataService(DbContext dbContext, IMapper mapper):base(dbContext,mapper)
+        {
+            
+        }
+
+        
 
         public virtual bool BulkInsert(IEnumerable<BO> entityList)
         {
@@ -139,7 +245,7 @@ namespace ApiStackNet.BLL
         private TEntity InternalAdd(BO entity)
         {
             TEntity internalItem = mapper.Map<TEntity>(entity);
-            internalItem.Active = true;
+            //internalItem.Active = true; 
 
             GetSet().Add(internalItem);
             return internalItem;
@@ -160,93 +266,6 @@ namespace ApiStackNet.BLL
             return true;
         }
 
-        public virtual PagedList<DTO> List( int page, int pageSize)
-        {
-            return List(null, page, pageSize, null);
-        }
-
-        public virtual PagedList<DTO> List(Expression<Func<TEntity, bool>> where, int page, int pageSize)
-        {
-            return List(where, page, pageSize, null);
-        }
-
-       
-
-        public virtual PagedList<DTO> List(Expression<Func<TEntity,bool>> where, int page,int pageSize, IList<OrderInfo<TEntity>> orderbyList)
-        {
-            var query = GetQueriable();
-            if (where != null)
-            {
-              query=query.Where(where);
-            }
-
-            int count = query.Count();
-
-            //TODO: add sort and default values
-            if (orderbyList != null && orderbyList.Count>0)
-            {
-                int i = 0;
-                foreach (var ob in orderbyList)
-                {
-                    query= SetOrderByClause(query, i, ob);
-                    //query = query.OrderBy(lambda);
-
-                    i++;
-                }
-            }
-            else
-            {
-                //paging require almost 1 sort dimension
-                query = query.OrderBy(x=>x.Id);
-            }
-
-            
-            if (page > 0)
-            {
-                query = query.Skip(page * pageSize);
-            }
-            if (pageSize > 0)
-            {
-                query = query.Take(pageSize);
-            }
-
-         
-
-            var dtos= mapper.Map<List<DTO>>(query.ToList());
-
-            var list = new PagedList<DTO>(dtos, page, pageSize, count);
-
-            return list;
-        }
-
-        private static IQueryable<TEntity> SetOrderByClause(IQueryable<TEntity> query, int i, OrderInfo<TEntity> ob)
-        {
-
-            if (i == 0)
-            {
-                if (ob.Direction == OrderByDirection.ASC)
-                {
-                    return QueryHelper.OrderByProperty<TEntity>(query, ob.KeySelector.Member.Name);
-                }
-                else
-                {
-                    return QueryHelper.OrderByPropertyDescending<TEntity>(query, ob.KeySelector.Member.Name);
-                }
-            }
-            else
-            {
-                if (ob.Direction == OrderByDirection.ASC)
-                {
-                    return QueryHelper.ThenOrderByProperty<TEntity>(query, ob.KeySelector.Member.Name);
-                }
-                else
-                {
-                    return QueryHelper.ThenOrderByPropertyDescending<TEntity>(query, ob.KeySelector.Member.Name);
-                }
-            }
-
-           
-        }
           
     }
 }

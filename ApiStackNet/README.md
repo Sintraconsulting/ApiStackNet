@@ -103,6 +103,21 @@ There is one service for primary key type, naming convention is <PK>DataService,
 
 ## Controller
 
+Implementing a Controller extenfing `DataController`, this bring to you all CRUD functionalities.
+
+
+```cs
+    public class MyTableController : DataController<MyTableDataService, MyTableDTO, MyTableBO, MyTable, int>
+    {
+        public MyTableController(MyTableDataService service) : base(service)
+        {
+        }
+    }
+```
+
+ Each field can be searched from client. This work only for entity field. Related search (i.e. get all project of a given user) must be implemented by custom  method or method extension.
+
+
 ```json
 {
   "PageNumber": 1,

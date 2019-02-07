@@ -20,9 +20,25 @@ namespace ApiStackNet.BLL.Service
 
         protected override TEntity InternalGetById(int Id)
         {
-
             var query = GetQueriable().Where(x => x.Id == Id);
+            var internalItem = query.ToList().SingleOrDefault();
+            return internalItem;
+        }
+    }
 
+
+
+    public abstract class IntDataService<DTO,  TEntity> : IReadOnlyDataService<DTO,  TEntity, int>
+     where TEntity : BaseEntity<int>
+     where DTO : BaseEntity<int>
+
+    {
+        public IntDataService(DbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        { }
+
+        protected override TEntity InternalGetById(int Id)
+        {
+            var query = GetQueriable().Where(x => x.Id == Id);
             var internalItem = query.ToList().SingleOrDefault();
             return internalItem;
         }

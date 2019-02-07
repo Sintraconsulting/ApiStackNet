@@ -8,6 +8,6 @@ namespace ApiStackNet.DAL.Model
 {
     public class BaseEntity<PKType>
     {
-        public PKType Id { get; set; }
+        public virtual PKType Id { get; set; }
     }
 }
