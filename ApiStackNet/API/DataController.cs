@@ -30,13 +30,13 @@ namespace ApiStackNet.API.Controllers
         }
         [HttpGet]
         [Route("fetch")]
-        public WrappedResponse<DTO> Fetch(PK id)
+        public virtual WrappedResponse<DTO> Fetch(PK id)
         {
             return WrappedOK(Service.GetById(id));
         }
         [HttpPost]
         [Route("list")]
-        public WrappedResponse<PagedList<DTO>> List(GenericPagedFilter query)
+        public virtual WrappedResponse<PagedList<DTO>> List(GenericPagedFilter query)
         {
             var predicate = PredicateBuilder.False<TEntity>();
 
@@ -110,11 +110,22 @@ namespace ApiStackNet.API.Controllers
             this.Service = service;
         }
 
-        
 
+        [HttpGet]
+        [Route("fetch")]
+        public override  WrappedResponse<DTO> Fetch(PK id)
+        {
+            return base.Fetch(id);
+        }
+        [HttpPost]
+        [Route("list")]
+        public override WrappedResponse<PagedList<DTO>> List(GenericPagedFilter query)
+        {
+            return base.List(query);
+        }
         [HttpPost]
         [Route("save")]
-        public WrappedResponse<DTO> Save(BO objectToSave)
+        public virtual WrappedResponse<DTO> Save(BO objectToSave)
         {
             return WrappedOK(Service.Save(objectToSave));
         }
@@ -122,7 +133,7 @@ namespace ApiStackNet.API.Controllers
 
         [HttpPost]
         [Route("bulk-save")]
-        public WrappedResponse<bool> BulkSave(IEnumerable<BO> objectToSave)
+        public virtual WrappedResponse<bool> BulkSave(IEnumerable<BO> objectToSave)
         {
             return WrappedOK(Service.BulkSave(objectToSave));
         }
@@ -131,7 +142,7 @@ namespace ApiStackNet.API.Controllers
 
         [HttpPost]
         [Route("bulk-add")]
-        public WrappedResponse<bool> BulkInsert(IEnumerable<BO> objectToSave)
+        public virtual WrappedResponse<bool> BulkInsert(IEnumerable<BO> objectToSave)
         {
             return WrappedOK(Service.BulkInsert(objectToSave));
         }
@@ -139,7 +150,7 @@ namespace ApiStackNet.API.Controllers
 
         [HttpDelete]
         [Route("delete")]
-        public WrappedResponse<bool> Delete(PK Id)
+        public virtual WrappedResponse<bool> Delete(PK Id)
         {
             return WrappedOK(Service.Delete(Id));
         }
