@@ -33,8 +33,9 @@ namespace ApiStackNet.BLL
                 //   query = query.Where(x => x.Active == true);
 
                 ParameterExpression paramterExpression = Expression.Parameter(typeof(TEntity));
-                var orderByProperty = Expression.Property(paramterExpression, "Id");
-                var lambda = Expression.Lambda<Func<TEntity, bool>>(orderByProperty, paramterExpression);
+                var idProperty = Expression.Property(paramterExpression, "Active");
+                var comparison= Expression.Equal(idProperty, Expression.Constant(true));
+                var lambda = Expression.Lambda<Func<TEntity, bool>>(comparison, paramterExpression);
                 query = Queryable.Where(query, lambda);
             }
             return query;

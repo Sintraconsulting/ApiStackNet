@@ -111,18 +111,7 @@ namespace ApiStackNet.API.Controllers
         }
 
 
-        [HttpGet]
-        [Route("fetch")]
-        public override  WrappedResponse<DTO> Fetch(PK id)
-        {
-            return base.Fetch(id);
-        }
-        [HttpPost]
-        [Route("list")]
-        public override WrappedResponse<PagedList<DTO>> List(GenericPagedFilter query)
-        {
-            return base.List(query);
-        }
+        
         [HttpPost]
         [Route("save")]
         public virtual WrappedResponse<DTO> Save(BO objectToSave)
