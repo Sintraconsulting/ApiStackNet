@@ -121,6 +121,8 @@
     <Compile Include="API\Model\PagedRequest.cs" />
     <Compile Include="API\Model\UIMessage.cs" />
     <Compile Include="API\Model\Metadata.cs" />
+    <Compile Include="API\Model\UiMessageType.cs" />
+    <Compile Include="API\Model\UiMessageTarget.cs" />
     <Compile Include="API\Model\WrappedResponse.cs" />
     <Compile Include="BLL\IDataService.cs" />
     <Compile Include="BLL\Model\BaseDTO.cs" />

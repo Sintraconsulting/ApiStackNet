@@ -9,7 +9,23 @@ namespace ApiStackNet.API.Model
     public class UIMessage
     {
         public string Code { get; set; }
-        public string Description { get; set; }
+
+        public string Title { get; set; }
+
+        public string Message { get; set; }
+
+        public UiMessageType Type { get; set; }
+
+        public string FieldId { get; set; }
+
+        public UiMessageTarget Target { get; set; }
+
         public string CultureName { get; set; }
+
+
+        public UIMessage() { }
+
+
+
     }
 }
