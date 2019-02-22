@@ -89,7 +89,29 @@ namespace ApiStackNet.API.Controllers
             typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
 
             var value = Expression.Constant(typedValue);
-            var clause = Expression.Equal(nameProperty, value);
+
+            Expression clause = null;
+
+            switch (filter.Comparator)
+            {
+                case QueryComparator.Equal:
+                    clause = Expression.Equal(nameProperty, value);
+                    break;
+                case QueryComparator.Greater:
+                    clause = Expression.GreaterThan(nameProperty, value);
+                    break;
+                case QueryComparator.Lower:
+                    clause = Expression.LessThan(nameProperty, value);
+                    break;
+                case QueryComparator.Contains:
+                    // Contains
+                    
+                    break;
+                default:
+                    break;
+            }
+
+            
             andExp = Expression.AndAlso(andExp, clause);
             return andExp;
         }
