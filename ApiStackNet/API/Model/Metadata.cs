@@ -8,7 +8,7 @@ namespace ApiStackNet.API.Model
 {
     public class Metadata
     {
-        public IList<UIMessage> UiMessage { get; set; } = new List<UIMessage>();
+        public IList<UIMessage> UiMessages { get; set; } = new List<UIMessage>();
 
         /// <summary>
         /// Add INFO message for the client
@@ -29,7 +29,7 @@ namespace ApiStackNet.API.Model
             uiMessage.Code = code ?? "INFO_GENERIC";
             uiMessage.FieldId = fieldId ?? string.Empty;
 
-            this.UiMessage.Add(uiMessage);
+            this.UiMessages.Add(uiMessage);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace ApiStackNet.API.Model
             uiMessage.Code = code ?? "SUCC_GENERIC";
             uiMessage.FieldId = fieldId ?? string.Empty;
 
-            this.UiMessage.Add(uiMessage);
+            this.UiMessages.Add(uiMessage);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace ApiStackNet.API.Model
             uiMessage.Code = code ?? "ERR_GENERIC";
             uiMessage.FieldId = fieldId ?? string.Empty;
 
-            this.UiMessage.Add(uiMessage);
+            this.UiMessages.Add(uiMessage);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace ApiStackNet.API.Model
             uiMessage.Code = code ?? "WARN_GENERIC";
             uiMessage.FieldId = fieldId ?? string.Empty;
 
-            this.UiMessage.Add(uiMessage);
+            this.UiMessages.Add(uiMessage);
         }
     }
 }
