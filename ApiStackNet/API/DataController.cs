@@ -105,7 +105,9 @@ namespace ApiStackNet.API.Controllers
                     break;
                 case QueryComparator.Contains:
                     // Contains
-                    
+                    clause = Expression.Equal(nameProperty, value);
+
+
                     break;
                 default:
                     break;
