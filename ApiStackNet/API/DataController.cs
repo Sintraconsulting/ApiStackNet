@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -105,9 +106,11 @@ namespace ApiStackNet.API.Controllers
                     break;
                 case QueryComparator.Contains:
                     // Contains
-                    clause = Expression.Equal(nameProperty, value);
-
-
+                    
+                    var propertyExp = Expression.Property(argParam, filter.Name);
+                    MethodInfo method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
+                    clause = Expression.Constant(value.Value, typeof(string));
+                    
                     break;
                 default:
                     break;
