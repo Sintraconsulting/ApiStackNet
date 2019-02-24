@@ -105,12 +105,14 @@ namespace ApiStackNet.API.Controllers
                     clause = Expression.LessThan(nameProperty, value);
                     break;
                 case QueryComparator.Contains:
+                    
                     // Contains
-                    
                     var propertyExp = Expression.Property(argParam, filter.Name);
-                    MethodInfo method = typeof(string).GetMethod("Contains", new[] { typeof(string) });
-                    clause = Expression.Constant(value.Value, typeof(string));
-                    
+                    MethodInfo method = typeof(string).GetMethod("Contains", new Type[] { typeof(string) });
+                    var constant = Expression.Constant(value.Value, typeof(string));
+                    clause = Expression.Call(propertyExp, method, Expression.Constant(value.Value));
+           
+
                     break;
                 default:
                     break;
