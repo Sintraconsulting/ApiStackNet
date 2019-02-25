@@ -108,6 +108,7 @@
     <Compile Include="API\Config\ApiStackDirectRouteProvider.cs" />
     <Compile Include="API\Config\WebApiExtension.cs" />
     <Compile Include="API\DataController.cs" />
+    <Compile Include="API\ApiStackExceptionLogger.cs" />
     <Compile Include="API\Model\GenericPagedFilter.cs" />
     <Compile Include="API\Model\PagedRequest.cs" />
     <Compile Include="API\Model\UIMessage.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Core\ConversionHelper.cs" />
     <Compile Include="Core\PredicateBuilder.cs" />
     <Compile Include="Core\QueryHelper.cs" />
+    <Compile Include="DAL\ApiStackDbContext.cs" />
     <Compile Include="DAL\Model\AuditableEntity.cs" />
     <Compile Include="DAL\Model\BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
