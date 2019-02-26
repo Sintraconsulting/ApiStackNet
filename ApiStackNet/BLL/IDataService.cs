@@ -116,7 +116,6 @@ namespace ApiStackNet.BLL
             }
 
 
-
             var dtos = mapper.Map<List<DTO>>(query.ToList());
 
             var list = new PagedList<DTO>(dtos, page, pageSize, count);

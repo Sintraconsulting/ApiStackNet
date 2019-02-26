@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 
 namespace ApiStackNet.API.Config
 {
@@ -14,6 +15,13 @@ namespace ApiStackNet.API.Config
             config.MapHttpAttributeRoutes(new ApiStackDirectRouteProvider());
         }
 
-       
+
+        public static void AddExceptionLogger(this HttpConfiguration config)
+        {
+            config.Services.Replace(typeof(IExceptionLogger), new ApiStackExceptionLogger());
+            config.Filters.Add(new ApiStackExceptionFilterAttribute());
+
+        }
+
     }
 }

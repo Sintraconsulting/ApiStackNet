@@ -18,14 +18,14 @@ using System.Web.Http.Results;
 
 namespace ApiStackNet.API.Controllers
 {
-    public class DataController<TService, DTO, TEntity, PK> : BaseController
+    public class ReadOnlyDataController<TService, DTO, TEntity, PK> : BaseController
        where TService : IReadOnlyDataService<DTO, TEntity, PK>
        where TEntity : BaseEntity<PK>
        where DTO : BaseEntity<PK>
     {
         TService Service { get; set; }
 
-        public DataController(TService service)
+        public ReadOnlyDataController(TService service)
         {
             this.Service = service;
         }
@@ -126,7 +126,7 @@ namespace ApiStackNet.API.Controllers
 
 
 
-        public class DataController<TService,DTO, BO, TEntity, PK>: DataController<TService, DTO, TEntity, PK>
+        public class DataController<TService,DTO, BO, TEntity, PK>: ReadOnlyDataController<TService, DTO, TEntity, PK>
         where TService : IDataService<DTO, BO, TEntity, PK>
         where TEntity : BaseEntity<PK>
         where BO : BaseEntity<PK>
