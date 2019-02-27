@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -89,7 +90,35 @@ namespace ApiStackNet.API.Controllers
             typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
 
             var value = Expression.Constant(typedValue);
-            var clause = Expression.Equal(nameProperty, value);
+
+            Expression clause = null;
+
+            switch (filter.Comparator)
+            {
+                case QueryComparator.Equal:
+                    clause = Expression.Equal(nameProperty, value);
+                    break;
+                case QueryComparator.Greater:
+                    clause = Expression.GreaterThan(nameProperty, value);
+                    break;
+                case QueryComparator.Lower:
+                    clause = Expression.LessThan(nameProperty, value);
+                    break;
+                case QueryComparator.Contains:
+                    
+                    // Contains
+                    var propertyExp = Expression.Property(argParam, filter.Name);
+                    MethodInfo method = typeof(string).GetMethod("Contains", new Type[] { typeof(string) });
+                    var constant = Expression.Constant(value.Value, typeof(string));
+                    clause = Expression.Call(propertyExp, method, Expression.Constant(value.Value));
+           
+
+                    break;
+                default:
+                    break;
+            }
+
+            
             andExp = Expression.AndAlso(andExp, clause);
             return andExp;
         }
