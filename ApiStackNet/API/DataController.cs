@@ -24,8 +24,8 @@ namespace ApiStackNet.API.Controllers
        where DTO : BaseEntity<PK>
     {
         TService Service { get; set; }
-
-        public ReadOnlyDataController(TService service)
+        
+        public ReadOnlyDataController(TService service):base()
         {
             this.Service = service;
         }

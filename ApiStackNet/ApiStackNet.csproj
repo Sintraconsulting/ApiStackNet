@@ -111,7 +111,7 @@
     <Compile Include="API\ApiStackExceptionLogger.cs" />
     <Compile Include="API\Model\GenericPagedFilter.cs" />
     <Compile Include="API\Model\PagedRequest.cs" />
-    <Compile Include="API\Model\UIMessage.cs" />
+    <Compile Include="API\Model\UiMessage.cs" />
     <Compile Include="API\Model\Metadata.cs" />
     <Compile Include="API\Model\UiMessageType.cs" />
     <Compile Include="API\Model\UiMessageTarget.cs" />
@@ -119,6 +119,7 @@
     <Compile Include="BLL\IDataService.cs" />
     <Compile Include="BLL\Model\BaseDTO.cs" />
     <Compile Include="BLL\Model\OrderInfo.cs" />
+    <Compile Include="BLL\Service\MessageService.cs" />
     <Compile Include="BLL\Service\GuidDataService.cs" />
     <Compile Include="BLL\Service\IntDataService.cs" />
     <Compile Include="BLL\Service\StringDataService.cs" />

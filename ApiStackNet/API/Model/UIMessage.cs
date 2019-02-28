@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiStackNet.API.Model
 {
-    public class UIMessage
+    public class UiMessage
     {
         public string Code { get; set; }
 
@@ -23,7 +23,7 @@ namespace ApiStackNet.API.Model
         public string CultureName { get; set; }
 
 
-        public UIMessage() { }
+        public UiMessage() { }
 
 
 
