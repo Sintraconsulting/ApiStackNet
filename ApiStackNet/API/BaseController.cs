@@ -19,14 +19,35 @@ namespace ApiStackNet.API.Controllers
         protected   WrappedResponse<T> WrappedOK<T>(T o)
         {
             var result = new WrappedResponse<T>(o);
+
+           
+            SetMessages(result);
+
+            return result;
+        }
+
+       
+        protected WrappedResponse<T> WrappedKO<T>(T o, int errorCode)
+        {
+            var result = new WrappedResponse<T>();
+
+            result.Data = default(T);
+            SetMessages(result);
             
+
+            return result;
+        }
+
+
+        private void SetMessages<T>(WrappedResponse<T> result)
+        {
             // UIMESSAGE MANAGING:
 
             // WARNING:: To avoid a null pointer exception
             // if service are not injected, check if 
             // MessageService is not null
-            
-            if (MessageService!=null && MessageService.HasMessages)
+
+            if (MessageService != null && MessageService.HasMessages)
             {
 
                 if (result.Metadata == null)
@@ -37,8 +58,7 @@ namespace ApiStackNet.API.Controllers
                 result.Metadata.UiMessages = MessageService.UiMessages;
 
             }
-
-            return result;
         }
+
     }
 }
