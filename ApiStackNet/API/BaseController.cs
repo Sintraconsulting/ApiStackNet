@@ -3,6 +3,8 @@ using ApiStackNet.BLL.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -13,31 +15,17 @@ namespace ApiStackNet.API.Controllers
     public class BaseController:ApiController
     {
         public MessageService MessageService { get; set; }
-
-       
-     
-        protected   WrappedResponse<T> WrappedOK<T>(T o)
+        
+        protected WrappedResponse<T> WrappedOK<T>(T o)
         {
-            var result = new WrappedResponse<T>(o);
-
-           
-            SetMessages(result);
-
-            return result;
-        }
-
-       
-        protected WrappedResponse<T> WrappedKO<T>(T o, int errorCode)
-        {
-            var result = new WrappedResponse<T>();
-
-            result.Data = default(T);
-            SetMessages(result);
             
-
+            var result = new WrappedResponse<T>(o);
+            // aggiungo i messaggi 
+            SetMessages(result);
             return result;
         }
 
+ 
 
         private void SetMessages<T>(WrappedResponse<T> result)
         {
