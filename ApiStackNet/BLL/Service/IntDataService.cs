@@ -12,23 +12,23 @@ namespace ApiStackNet.BLL.Service
 
 
     public abstract class IntDataService<DTO, BO, TEntity, TEntityWrite> : IDataService<DTO, BO, TEntity, TEntityWrite, int>
-where TEntity : BaseEntity<Guid>
-where TEntityWrite : BaseEntity<Guid>
-where BO : BaseEntity<Guid>
-where DTO : BaseEntity<Guid>
+where TEntity : BaseEntity<int>
+where TEntityWrite : BaseEntity<int>
+where BO : BaseEntity<int>
+where DTO : BaseEntity<int>
 
     {
-        public GuidDataService(DbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public IntDataService(DbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         { }
 
-        protected override TEntity InternalGetById(Guid Id)
+        protected override TEntity InternalGetById(int Id)
         {
             var query = GetQueriable().Where(x => x.Id == Id);
             var internalItem = query.ToList().SingleOrDefault();
             return internalItem;
         }
 
-        protected override TEntityWrite InternalGetByIdForWrite(Guid Id)
+        protected override TEntityWrite InternalGetByIdForWrite(int Id)
         {
             var query = this.dbContext.Set<TEntityWrite>().AsQueryable().Where(x => x.Id == Id);
             var internalItem = query.ToList().SingleOrDefault();
@@ -55,7 +55,7 @@ where DTO : BaseEntity<Guid>
 
         protected override TEntity InternalGetByIdForWrite(int Id)
         {
-            return InternalGetById();
+            return InternalGetById(Id);
 
         }
     }
