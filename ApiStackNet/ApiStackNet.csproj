@@ -117,6 +117,7 @@
     <Compile Include="API\Model\UiMessageTarget.cs" />
     <Compile Include="API\Model\WrappedResponse.cs" />
     <Compile Include="BLL\IDataService.cs" />
+    <Compile Include="BLL\IReadOnlyDataService.cs" />
     <Compile Include="BLL\Model\BaseDTO.cs" />
     <Compile Include="BLL\Model\OrderInfo.cs" />
     <Compile Include="BLL\Service\MessageService.cs" />
