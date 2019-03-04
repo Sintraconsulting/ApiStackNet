@@ -170,7 +170,7 @@ namespace ApiStackNet.API.Controllers
     }
 
     public class DataController<TService, DTO, BO, TEntity, PK> : ReadOnlyDataController<TService, DTO, TEntity, PK>
-    where TService : IDataService<DTO, BO, TEntity, PK>
+    where TService : IDataService<DTO, BO, TEntity, TEntity, PK>
     where TEntity : BaseEntity<PK>
     where BO : BaseEntity<PK>
     where DTO : BaseEntity<PK>

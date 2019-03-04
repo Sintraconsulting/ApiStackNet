@@ -21,16 +21,16 @@ namespace ApiStackNet.API.Model
         /// <param name="target">message destination type</param>
         public void AddInfo(string message, UiMessageTarget? target = null, string title = null, string code = null, string fieldId = null)
         {
-            var uiMessage = new UIMessage();
-            uiMessage.Message = message;
-            uiMessage.Type = UiMessageType.INFO;
-            uiMessage.Target = target ?? UiMessageTarget.CONSOLE;
+            var UiMessage = new UiMessage();
+            UiMessage.Message = message;
+            UiMessage.Type = UiMessageType.INFO;
+            UiMessage.Target = target ?? UiMessageTarget.CONSOLE;
 
-            uiMessage.Title = title;
-            uiMessage.Code = code ?? "INFO_GENERIC";
-            uiMessage.FieldId = fieldId ?? string.Empty;
+            UiMessage.Title = title;
+            UiMessage.Code = code ?? "INFO_GENERIC";
+            UiMessage.FieldId = fieldId ?? string.Empty;
 
-            this.UiMessages.Add(uiMessage);
+            this.UiMessages.Add(UiMessage);
         }
 
         /// <summary>
@@ -43,16 +43,16 @@ namespace ApiStackNet.API.Model
         /// <param name="target">message destination type</param>
         public void AddSuccess(string message, UiMessageTarget? target = null, string title = null, string code = null, string fieldId = null)
         {
-            var uiMessage = new UIMessage();
-            uiMessage.Message =  message;
-            uiMessage.Type = UiMessageType.SUCCESS;
-            uiMessage.Target = target ?? UiMessageTarget.TOAST;
+            var UiMessage = new UiMessage();
+            UiMessage.Message =  message;
+            UiMessage.Type = UiMessageType.SUCCESS;
+            UiMessage.Target = target ?? UiMessageTarget.TOAST;
 
-            uiMessage.Title = title;
-            uiMessage.Code = code ?? "SUCC_GENERIC";
-            uiMessage.FieldId = fieldId ?? string.Empty;
+            UiMessage.Title = title;
+            UiMessage.Code = code ?? "SUCC_GENERIC";
+            UiMessage.FieldId = fieldId ?? string.Empty;
 
-            this.UiMessages.Add(uiMessage);
+            this.UiMessages.Add(UiMessage);
         }
 
         /// <summary>
@@ -65,16 +65,16 @@ namespace ApiStackNet.API.Model
         /// <param name="target">message destination type</param>
         public void AddError(string message, UiMessageTarget? target = null, string title = null, string code = null, string fieldId = null)
         {
-            var uiMessage = new UIMessage();
-            uiMessage.Message = message;
-            uiMessage.Type = UiMessageType.ERROR;
-            uiMessage.Target = target ?? UiMessageTarget.TOAST;
+            var UiMessage = new UiMessage();
+            UiMessage.Message = message;
+            UiMessage.Type = UiMessageType.ERROR;
+            UiMessage.Target = target ?? UiMessageTarget.TOAST;
 
-            uiMessage.Title = title; 
-            uiMessage.Code = code ?? "ERR_GENERIC";
-            uiMessage.FieldId = fieldId ?? string.Empty;
+            UiMessage.Title = title; 
+            UiMessage.Code = code ?? "ERR_GENERIC";
+            UiMessage.FieldId = fieldId ?? string.Empty;
 
-            this.UiMessages.Add(uiMessage);
+            this.UiMessages.Add(UiMessage);
         }
 
         /// <summary>
@@ -87,16 +87,16 @@ namespace ApiStackNet.API.Model
         /// <param name="target">message destination type</param>
         public void AddWarning(string message, UiMessageTarget? target = null, string title = null, string code = null, string fieldId = null)
         {
-            var uiMessage = new UIMessage();
-            uiMessage.Message = message;
-            uiMessage.Type = UiMessageType.WARNING;
-            uiMessage.Target = target ?? UiMessageTarget.TOAST;
+            var UiMessage = new UiMessage();
+            UiMessage.Message = message;
+            UiMessage.Type = UiMessageType.WARNING;
+            UiMessage.Target = target ?? UiMessageTarget.TOAST;
 
-            uiMessage.Title = title;
-            uiMessage.Code = code ?? "WARN_GENERIC";
-            uiMessage.FieldId = fieldId ?? string.Empty;
+            UiMessage.Title = title;
+            UiMessage.Code = code ?? "WARN_GENERIC";
+            UiMessage.FieldId = fieldId ?? string.Empty;
 
-            this.UiMessages.Add(uiMessage);
+            this.UiMessages.Add(UiMessage);
         }
     }
 }
