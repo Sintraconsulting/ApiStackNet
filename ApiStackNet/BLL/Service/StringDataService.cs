@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ApiStackNet.BLL.Service
 {
-    public abstract class StringDataService<DTO, BO, TEntity> : IDataService<DTO, BO, TEntity, string>
+    public abstract class StringDataService<DTO, BO, TEntity> : IDataService<DTO, BO, TEntity, TEntity, string>
       where TEntity : AuditableEntity<string>
       where BO : BaseEntity<string>
       where DTO : BaseEntity<string>
