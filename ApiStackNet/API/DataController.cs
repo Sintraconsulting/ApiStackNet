@@ -19,11 +19,15 @@ using System.Web.Http.Results;
 namespace ApiStackNet.API.Controllers
 {
     public class ReadOnlyDataController<TService, DTO, TEntity, PK> : BaseController
-       where TService : IReadOnlyDataService<DTO, TEntity, PK>
-       where TEntity : BaseEntity<PK>
-       where DTO : BaseEntity<PK>
+    where TService : IReadOnlyDataService<DTO, TEntity, PK>
+    where TEntity : BaseEntity<PK>
+    where DTO : BaseEntity<PK>
     {
-        TService Service { get; set; }
+        TService Service
+        {
+            get;
+            set;
+        }
 
         public ReadOnlyDataController(TService service)
         {
@@ -58,7 +62,8 @@ namespace ApiStackNet.API.Controllers
                 }
             }
 
-            var lambda = Expression.Lambda<Func<TEntity, bool>>(andExp, argParam);
+            var lambda = Expression.Lambda<Func<TEntity,
+             bool>>(andExp, argParam);
 
 
             var orderbyList = new List<OrderInfo<TEntity>>();
@@ -68,11 +73,11 @@ namespace ApiStackNet.API.Controllers
                 foreach (var oder in query.OrderBy)
                 {
                     orderbyList.Add(
-                    new OrderInfo<TEntity>()
-                    {
-                        KeySelector = Expression.PropertyOrField(argParam, oder.Name),
-                        Direction = oder.Direction
-                    });
+                     new OrderInfo<TEntity>()
+                     {
+                         KeySelector = Expression.PropertyOrField(argParam, oder.Name),
+                         Direction = oder.Direction
+                     });
                 }
 
                 //orderbyList.Add(
@@ -105,42 +110,45 @@ namespace ApiStackNet.API.Controllers
                     clause = Expression.LessThan(nameProperty, value);
                     break;
                 case QueryComparator.Contains:
-                    
+
                     // Contains
                     var propertyExp = Expression.Property(argParam, filter.Name);
-                    MethodInfo method = typeof(string).GetMethod("Contains", new Type[] { typeof(string) });
+                    MethodInfo method = typeof(string).GetMethod("Contains", new Type[] {
+       typeof(string)
+      });
                     var constant = Expression.Constant(value.Value, typeof(string));
                     clause = Expression.Call(propertyExp, method, Expression.Constant(value.Value));
-           
+
 
                     break;
                 default:
                     break;
             }
 
-            
+
             andExp = Expression.AndAlso(andExp, clause);
             return andExp;
         }
     }
 
-
-
-        public class DataController<TService,DTO, BO, TEntity, PK>: ReadOnlyDataController<TService, DTO, TEntity, PK>
-        where TService : IDataService<DTO, BO, TEntity, PK>
-        where TEntity : BaseEntity<PK>
-        where BO : BaseEntity<PK>
-        where DTO : BaseEntity<PK>
+    public class DataController<TService, DTO, BO, TEntity, TEntityWrite, PK> : ReadOnlyDataController<TService, DTO, TEntity, PK>
+     where TService : IDataService<DTO, BO, TEntity, TEntityWrite, PK>
+     where TEntity : BaseEntity<PK>
+     where TEntityWrite : BaseEntity<PK>
+     where BO : BaseEntity<PK>
+     where DTO : BaseEntity<PK>
     {
-        TService Service { get; set; }
+        TService Service
+        {
+            get;
+            set;
+        }
 
-        public DataController(TService service):base(service)
+        public DataController(TService service) : base(service)
         {
             this.Service = service;
         }
 
-
-        
         [HttpPost]
         [Route("save")]
         public virtual WrappedResponse<DTO> Save(BO objectToSave)
@@ -172,7 +180,58 @@ namespace ApiStackNet.API.Controllers
         {
             return WrappedOK(Service.Delete(Id));
         }
-       
 
+    }
+
+    public class DataController<TService, DTO, BO, TEntity, PK> : ReadOnlyDataController<TService, DTO, TEntity, PK>
+     where TService : IDataService<DTO, BO, TEntity, TEntity, PK>
+     where TEntity : BaseEntity<PK>
+     where BO : BaseEntity<PK>
+     where DTO : BaseEntity<PK>
+    {
+        TService Service
+        {
+            get;
+            set;
+        }
+
+        public DataController(TService service) : base(service)
+        {
+            this.Service = service;
+        }
+
+
+
+        [HttpPost]
+        [Route("save")]
+        public virtual WrappedResponse<DTO> Save(BO objectToSave)
+        {
+            return WrappedOK(Service.Save(objectToSave));
+        }
+
+
+        [HttpPost]
+        [Route("bulk-save")]
+        public virtual WrappedResponse<bool> BulkSave(IEnumerable<BO> objectToSave)
+        {
+            return WrappedOK(Service.BulkSave(objectToSave));
+        }
+
+
+
+        [HttpPost]
+        [Route("bulk-add")]
+        public virtual WrappedResponse<bool> BulkInsert(IEnumerable<BO> objectToSave)
+        {
+            return WrappedOK(Service.BulkInsert(objectToSave));
+        }
+
+
+        [HttpDelete]
+        [Route("delete")]
+        public virtual WrappedResponse<bool> Delete(PK Id)
+        {
+            return WrappedOK(Service.Delete(Id));
+        }
     }
 }
