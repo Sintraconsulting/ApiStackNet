@@ -14,7 +14,7 @@ namespace ApiStackNet.BLL.Service
         {
             UiMessages = new List<UiMessage>();
         }
-
+        
         public  bool HasMessages { get { return (UiMessages!=null && UiMessages.Count > 0); }  }
         public  List<UiMessage> UiMessages { get; set; } 
         /// <summary>

@@ -25,7 +25,14 @@ namespace ApiStackNet.API.Controllers
             return result;
         }
 
- 
+        protected WrappedResponse<T> WrappedKO<T>(T o,HttpStatusCode status)
+        {
+            var result = WrappedOK(o);
+            result.Status = status;
+            return result;
+            
+        }
+
 
         private void SetMessages<T>(WrappedResponse<T> result)
         {
