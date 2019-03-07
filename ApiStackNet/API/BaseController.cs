@@ -11,7 +11,7 @@ namespace ApiStackNet.API.Controllers
 {
     public class BaseController:ApiController
     {
-        protected   WrappedResponse<T> WrappedOK<T>(T o)
+        protected WrappedResponse<T> WrappedOK<T>(T o)
         {
             var result = new WrappedResponse<T>(o);
 
