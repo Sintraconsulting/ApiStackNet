@@ -23,5 +23,12 @@ namespace ApiStackNet.API.Config
 
         }
 
+
+        public static void AddMessagePack(this HttpConfiguration config)
+        {
+            config.Formatters.Add(new MessagePackFormatter());
+
+        }
+
     }
 }
