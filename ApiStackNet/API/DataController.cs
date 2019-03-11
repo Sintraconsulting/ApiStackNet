@@ -5,11 +5,13 @@ using ApiStackNet.BLL.Service;
 using ApiStackNet.Core;
 using ApiStackNet.DAL.Model;
 using Calabonga.PagedListLite;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +26,8 @@ namespace ApiStackNet.API.Controllers
        where DTO : BaseEntity<PK>
     {
         TService Service { get; set; }
-
-        public ReadOnlyDataController(TService service)
+        
+        public ReadOnlyDataController(TService service):base()
         {
             this.Service = service;
         }
@@ -65,14 +67,29 @@ namespace ApiStackNet.API.Controllers
 
             if (query != null && query.OrderBy != null)
             {
-                foreach (var oder in query.OrderBy)
+                foreach (var order in query.OrderBy)
                 {
-                    orderbyList.Add(
-                    new OrderInfo<TEntity>()
+                    // check if order is valid
+                    MemberExpression nameProperty = null;
+                    try
                     {
-                        KeySelector = Expression.PropertyOrField(argParam, oder.Name),
-                        Direction = oder.Direction
-                    });
+                        nameProperty = Expression.Property(argParam, order.Name);
+                        orderbyList.Add(
+                           new OrderInfo<TEntity>()
+                           {
+                               KeySelector = nameProperty,
+                               Direction = order.Direction
+                           }
+                       );
+                    }
+                    catch (Exception e)
+                    {
+                        //logger.Warn($"Order error: field not valid: {e.Message}");
+                        MessageService.AddWarning($"Order error: field not valid: {e.Message}", UiMessageTarget.TOAST, "Filter Parser", "SFW_102", order.Name);
+
+                    }
+
+                   
                 }
 
                 //orderbyList.Add(
@@ -82,9 +99,22 @@ namespace ApiStackNet.API.Controllers
             return WrappedOK(Service.List(lambda, query.PageNumber, query.PageSize, orderbyList));
         }
 
-        private static BinaryExpression AppendQueryClause(ParameterExpression argParam, BinaryExpression andExp, Filter filter)
+        private BinaryExpression AppendQueryClause(ParameterExpression argParam, BinaryExpression andExp, Filter filter)
         {
-            var nameProperty = Expression.Property(argParam, filter.Name);
+            MemberExpression nameProperty = null;
+
+            try
+            {
+                nameProperty = Expression.Property(argParam, filter.Name);
+
+            }
+            catch (Exception e)
+            {
+                //logger.Warn($"Filter error: field not valid: {e.Message}");
+                MessageService.AddWarning($"Filter error: field not valid: {e.Message}", UiMessageTarget.TOAST, "Filter Parser", "SFW_101", filter.Name);
+                return andExp;
+            }
+
 
             object typedValue = null;
             typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
@@ -124,10 +154,10 @@ namespace ApiStackNet.API.Controllers
         }
     }
 
-    public class DataController<TService, DTO, BO, TEntity, TEntityWrite, PK> : ReadOnlyDataController<TService, DTO, TEntity, PK>
+    public class DataController<TService, DTO, BO, TEntity,TEntityWrite, PK> : ReadOnlyDataController<TService, DTO, TEntity, PK>
      where TService : IDataService<DTO, BO, TEntity, TEntityWrite, PK>
      where TEntity : BaseEntity<PK>
-    where TEntityWrite : BaseEntity<PK>
+     where TEntityWrite : BaseEntity<PK>
      where BO : BaseEntity<PK>
      where DTO : BaseEntity<PK>
     {
