@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="API\BaseController.cs" />
     <Compile Include="API\Config\ApiStackDirectRouteProvider.cs" />
+    <Compile Include="API\Config\MapperInstaller.cs" />
     <Compile Include="API\Config\MessagePackMediaTypeFormatter.cs" />
     <Compile Include="API\Config\WebApiExtension.cs" />
     <Compile Include="API\DataController.cs" />
@@ -144,6 +145,5 @@
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
