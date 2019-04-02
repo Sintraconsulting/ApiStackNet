@@ -10,10 +10,22 @@ namespace ApiStackNet.Core
     public static class ConversionHelper
     {
 
-        public static object StringToObject(string value, Type propertyType)
+        public static object StringToObject(string value, Type extPropertyType)
         {
             object typedValue;
-            switch (propertyType.FullName)
+
+            if (value == null)
+            {
+                return null;
+            }
+
+            if (extPropertyType.Name == "Nullable`1")
+            {
+
+            }
+
+
+            switch (extPropertyType.FullName)
             {
                 case "System.Boolean":
                 case "bool":
@@ -36,7 +48,14 @@ namespace ApiStackNet.Core
                                 DateTimeStyles.AssumeUniversal);
                     break;
                 default:
-                    typedValue = value;
+                    if (extPropertyType.FullName.StartsWith("System.Nullable`1[[System.Int32"))
+                    {
+                        typedValue = int.Parse(value);
+                    }
+                    else
+                    {
+                        typedValue = value;
+                    }
                     break;
             }
 
