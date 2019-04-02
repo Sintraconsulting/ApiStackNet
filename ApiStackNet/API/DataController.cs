@@ -45,12 +45,7 @@ namespace ApiStackNet.API.Controllers
 
             ParameterExpression argParam = Expression.Parameter(typeof(TEntity), "x");
 
-
-
-
             var andExp = Expression.Equal(Expression.Constant(true), Expression.Constant(true));
-
-
 
             if (query != null && query.Filter != null)
             {
@@ -141,6 +136,8 @@ namespace ApiStackNet.API.Controllers
                     MethodInfo method = typeof(string).GetMethod("Contains", new Type[] { typeof(string) });
                     var constant = Expression.Constant(value.Value, typeof(string));
                     clause = Expression.Call(propertyExp, method, Expression.Constant(value.Value));
+                    break;
+                case QueryComparator.In:
 
 
                     break;
@@ -148,8 +145,13 @@ namespace ApiStackNet.API.Controllers
                     break;
             }
 
-
-            andExp = Expression.AndAlso(andExp, clause);
+            if (filter.Conjunction == Conjunction.AND)
+            {
+                andExp = Expression.AndAlso(andExp, clause);
+            }
+            else { 
+                andExp = Expression.OrElse(andExp, clause);
+            }
             return andExp;
         }
     }
