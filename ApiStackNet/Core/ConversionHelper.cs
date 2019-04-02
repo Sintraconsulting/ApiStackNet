@@ -10,7 +10,7 @@ namespace ApiStackNet.Core
     public static class ConversionHelper
     {
 
-        public static object StringToObject(string value, Type extPropertyType)
+        public static object StringToObject(string value, Type propertyType)
         {
             object typedValue;
 
@@ -19,11 +19,12 @@ namespace ApiStackNet.Core
                 return null;
             }
 
-            if (extPropertyType.Name == "Nullable`1")
+            var extPropertyType = propertyType;
+
+            if (propertyType.Name == "Nullable`1")
             {
-
+                extPropertyType = propertyType.GenericTypeArguments[0];
             }
-
 
             switch (extPropertyType.FullName)
             {
@@ -48,14 +49,7 @@ namespace ApiStackNet.Core
                                 DateTimeStyles.AssumeUniversal);
                     break;
                 default:
-                    if (extPropertyType.FullName.StartsWith("System.Nullable`1[[System.Int32"))
-                    {
-                        typedValue = int.Parse(value);
-                    }
-                    else
-                    {
-                        typedValue = value;
-                    }
+                    typedValue = value;
                     break;
             }
 
