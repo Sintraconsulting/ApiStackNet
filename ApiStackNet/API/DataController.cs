@@ -114,7 +114,7 @@ namespace ApiStackNet.API.Controllers
             object typedValue = null;
             typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
 
-            var value = Expression.Constant(typedValue);
+            var value = Expression.Constant(typedValue, nameProperty.Type);
 
             Expression clause = null;
 
