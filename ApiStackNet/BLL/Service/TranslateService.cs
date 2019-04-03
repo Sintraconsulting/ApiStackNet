@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
+
 namespace ApiStackNet.BLL.Service
 {
     public class TranslateService
