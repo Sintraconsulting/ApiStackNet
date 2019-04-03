@@ -131,6 +131,7 @@
     <Compile Include="BLL\Service\GuidDataService.cs" />
     <Compile Include="BLL\Service\IntDataService.cs" />
     <Compile Include="BLL\Service\StringDataService.cs" />
+    <Compile Include="BLL\Service\TranslateService.cs" />
     <Compile Include="Core\ConversionHelper.cs" />
     <Compile Include="Core\PredicateBuilder.cs" />
     <Compile Include="Core\QueryHelper.cs" />
