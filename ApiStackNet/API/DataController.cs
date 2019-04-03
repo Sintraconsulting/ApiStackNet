@@ -5,6 +5,7 @@ using ApiStackNet.BLL.Service;
 using ApiStackNet.Core;
 using ApiStackNet.DAL.Model;
 using Calabonga.PagedListLite;
+using Newtonsoft.Json.Linq;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -45,12 +46,7 @@ namespace ApiStackNet.API.Controllers
 
             ParameterExpression argParam = Expression.Parameter(typeof(TEntity), "x");
 
-
-
-
             var andExp = Expression.Equal(Expression.Constant(true), Expression.Constant(true));
-
-
 
             if (query != null && query.Filter != null)
             {
@@ -117,9 +113,15 @@ namespace ApiStackNet.API.Controllers
 
 
             object typedValue = null;
+
+            var value = Expression.Constant("");
+
+            if (filter.Comparator != QueryComparator.In)
+            {
             typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
 
-            var value = Expression.Constant(typedValue);
+                value = Expression.Constant(typedValue, nameProperty.Type);
+            }
 
             Expression clause = null;
 
@@ -141,15 +143,50 @@ namespace ApiStackNet.API.Controllers
                     MethodInfo method = typeof(string).GetMethod("Contains", new Type[] { typeof(string) });
                     var constant = Expression.Constant(value.Value, typeof(string));
                     clause = Expression.Call(propertyExp, method, Expression.Constant(value.Value));
+                    break;
+                case QueryComparator.In:
+                    // Contains
+                    var propertyExp2 = Expression.Property(argParam, filter.Name);
 
+                    string filterValues = filter.Value;
+
+                    if (!filterValues.StartsWith("["))
+                    {
+                        filterValues = String.Concat("[", filterValues);
+                    }
+
+                    if (!filterValues.EndsWith("]"))
+                    {
+                        filterValues = String.Concat(filterValues,"]");
+                    }
+
+                    var values = JArray.Parse(filterValues);
+
+                    var listType = typeof(List<>).MakeGenericType(nameProperty.Type);
+                    var listInstance=Activator.CreateInstance(listType);
+                    
+                    var addmethod = listType.GetMethod("Add");
+                    foreach(var val in values)
+                    {
+                        var typedVal = val.ToObject(nameProperty.Type);
+                        addmethod.Invoke(listInstance,new object[] { typedVal });
+                     }
+
+                    MethodInfo method2 = listType.GetMethod("Contains", new Type[] { nameProperty.Type });
+                    clause = Expression.Call(Expression.Constant(listInstance), method2, propertyExp2);
 
                     break;
                 default:
                     break;
             }
 
-
+            if (filter.Conjunction == Conjunction.AND)
+            {
             andExp = Expression.AndAlso(andExp, clause);
+            }
+            else { 
+                andExp = Expression.OrElse(andExp, clause);
+            }
             return andExp;
         }
     }
