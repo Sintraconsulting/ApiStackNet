@@ -15,7 +15,8 @@ namespace ApiStackNet.API.Controllers
     public class BaseController:ApiController
     {
         public MessageService MessageService { get; set; }
-        
+        public TranslateService TranslateService { get; set; }
+
         protected WrappedResponse<T> WrappedOK<T>(T o)
         {
             
@@ -25,9 +26,9 @@ namespace ApiStackNet.API.Controllers
             return result;
         }
 
-        protected WrappedResponse<T> WrappedKO<T>(T o,HttpStatusCode status)
+        protected WrappedResponse<T> WrappedKO<T>(HttpStatusCode status)
         {
-            var result = WrappedOK(o);
+            var result = WrappedOK(default(T));
             result.Status = status;
             return result;
             
