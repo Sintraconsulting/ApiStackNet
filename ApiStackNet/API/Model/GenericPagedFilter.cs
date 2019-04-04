@@ -32,7 +32,7 @@ namespace ApiStackNet.API.Model
 
         public Conjunction Conjunction { get; set; } = Conjunction.AND;
 
-        List<Filter> Inner { get; set; }
+        public List<Filter> Inner { get; set; }
     }
 
     public class OrderBy
