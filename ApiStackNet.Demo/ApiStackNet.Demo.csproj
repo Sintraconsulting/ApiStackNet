@@ -191,20 +191,30 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="BLL\OrderDataService.cs" />
+    <Compile Include="BO\BO2EMapping\OrderBO2EMapping.cs" />
+    <Compile Include="BO\OrderBO.cs" />
     <Compile Include="Controllers\Api\MyTableController.cs" />
     <Compile Include="BLL\MyTableDataService.cs" />
     <Compile Include="BO\BO2EMapping\MyTableBO2EMapping.cs" />
     <Compile Include="BO\MyTableBO.cs" />
+    <Compile Include="Controllers\Api\OrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />
     <Compile Include="DTO\MyTableDTO.cs" />
+    <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="Entities\MyTable.cs" />
+    <Compile Include="Entities\Order.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201903261156439_createMyTable.cs" />
     <Compile Include="Migrations\201903261156439_createMyTable.Designer.cs">
       <DependentUpon>201903261156439_createMyTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903270921237_createOrder.cs" />
+    <Compile Include="Migrations\201903270921237_createOrder.Designer.cs">
+      <DependentUpon>201903270921237_createOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -306,6 +316,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903261156439_createMyTable.resx">
       <DependentUpon>201903261156439_createMyTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903270921237_createOrder.resx">
+      <DependentUpon>201903270921237_createOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -28,5 +28,12 @@ namespace ApiStackNet.Demo.Controllers.Api
         {
             return WrappedOK(this.MyTableDataService.GetById(id));
         }
+
+        [HttpPost]
+        [Route("save")]
+        public WrappedResponse<MyTableDTO> SaveMyTable(MyTableBO myTableBO)
+        {
+            return WrappedOK(this.MyTableDataService.SaveMyTable(myTableBO));
+        }
     }
 }

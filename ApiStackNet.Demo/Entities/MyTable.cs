@@ -11,10 +11,7 @@ namespace ApiStackNet.Demo.Entities
     [Table("MYTABLE", Schema = "DBO")]
     public class MyTable : AuditableEntity<Int32>
     {
-
         [Column("MY_CUSTOM_NAME")]
-        public string Field { get; set; }
-
-        public override DateTime CreatedOn { get; set; }
+        public string EntityName { get; set; }
     }
 }

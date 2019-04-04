@@ -17,5 +17,12 @@ namespace ApiStackNet.Demo.BLL.Services
         {
 
         }
+
+        public MyTableDTO SaveMyTable(MyTableBO myTableBO)
+        {
+            MyTableDTO myTableDTO = base.Save(myTableBO);
+            
+            return myTableDTO;
+        }
     }
 }

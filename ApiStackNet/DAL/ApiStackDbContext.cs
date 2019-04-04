@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -71,6 +72,7 @@ namespace ApiStackNet.DAL
                         {
                             SetValueOnAuditableEntity(item.Entity, "CreatedBy", ClaimsPrincipal.Current.Identity.Name);
                         }
+                        SetValueOnAuditableEntity(item.Entity, "DeletedOn", SqlDateTime.MinValue.Value);
                     }
 
                     if (item.State == EntityState.Added || item.State == EntityState.Modified)

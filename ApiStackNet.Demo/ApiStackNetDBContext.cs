@@ -20,5 +20,7 @@ namespace ApiStackNet.Demo
 
         //entities
         public DbSet<MyTable> MyTable { get; set; }
+
+        public DbSet<Order> Order { get; set; }
     }
 }
