@@ -16,7 +16,12 @@ namespace ApiStackNet.API.Model
         Equal,
         Greater,
         Lower,
-        Contains
+        Contains,
+        In
+    }
+    public enum Conjunction {
+        AND,
+        OR
     }
 
     public class Filter
@@ -24,6 +29,10 @@ namespace ApiStackNet.API.Model
        public string Name { get; set; }
        public  QueryComparator Comparator { get;set; }
        public string Value { get; set; }
+
+        public Conjunction Conjunction { get; set; } = Conjunction.AND;
+
+        List<Filter> Inner { get; set; }
     }
 
     public class OrderBy

@@ -13,7 +13,20 @@ namespace ApiStackNet.Core
         public static object StringToObject(string value, Type propertyType)
         {
             object typedValue;
-            switch (propertyType.FullName)
+
+            if (value == null)
+            {
+                return null;
+            }
+
+            var extPropertyType = propertyType;
+
+            if (propertyType.Name == "Nullable`1")
+            {
+                extPropertyType = propertyType.GenericTypeArguments[0];
+            }
+
+            switch (extPropertyType.FullName)
             {
                 case "System.Boolean":
                 case "bool":

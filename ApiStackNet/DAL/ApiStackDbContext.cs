@@ -72,6 +72,7 @@ namespace ApiStackNet.DAL
                         {
                             SetValueOnAuditableEntity(item.Entity, "CreatedBy", ClaimsPrincipal.Current.Identity.Name);
                         }
+
                         SetValueOnAuditableEntity(item.Entity, "DeletedOn", SqlDateTime.MinValue.Value);
                     }
 
