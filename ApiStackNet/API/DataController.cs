@@ -50,10 +50,13 @@ namespace ApiStackNet.API.Controllers
             Filter normalized = new Filter();
             normalized.Inner = query.Filter;
 
-            Expression andExp= null;
-            if (query != null && query.Filter != null)
+            Expression andExp = default(Expression);
+            if (query != null && query.Filter != null && query.Filter.Count > 0)
             {
                 andExp = RecursiveAddFilter(normalized, argParam, andExp);
+            } else
+            {
+                andExp = Expression.Equal(Expression.Constant(true), Expression.Constant(true));
             }
 
             var lambda = Expression.Lambda<Func<TEntity, bool>>(andExp, argParam);
@@ -186,7 +189,7 @@ namespace ApiStackNet.API.Controllers
                     // Contains
                     var propertyExp = Expression.Property(argParam, filter.Name);
                     MethodInfo method = typeof(string).GetMethod("Contains", new Type[] { typeof(string) });
-                    var constant = Expression.Constant(value.Value, typeof(string));
+                    //var constant = Expression.Constant(value.Value, typeof(string));
                     clause = Expression.Call(propertyExp, method, Expression.Constant(value.Value));
                     break;
                 case QueryComparator.In:
