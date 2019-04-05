@@ -27,8 +27,8 @@ namespace ApiStackNet.API.Controllers
        where DTO : BaseEntity<PK>
     {
         TService Service { get; set; }
-        
-        public ReadOnlyDataController(TService service):base()
+
+        public ReadOnlyDataController(TService service) : base()
         {
             this.Service = service;
         }
@@ -46,14 +46,17 @@ namespace ApiStackNet.API.Controllers
 
             ParameterExpression argParam = Expression.Parameter(typeof(TEntity), "x");
 
-            var andExp = Expression.Equal(Expression.Constant(true), Expression.Constant(true));
 
-            if (query != null && query.Filter != null)
+            Filter normalized = new Filter();
+            normalized.Inner = query.Filter;
+
+            Expression andExp = default(Expression);
+            if (query != null && query.Filter != null && query.Filter.Count > 0)
             {
-                foreach (var filter in query.Filter)
-                {
-                    andExp = AppendQueryClause(argParam, andExp, filter);
-                }
+                andExp = RecursiveAddFilter(normalized, argParam, andExp);
+            } else
+            {
+                andExp = Expression.Equal(Expression.Constant(true), Expression.Constant(true));
             }
 
             var lambda = Expression.Lambda<Func<TEntity, bool>>(andExp, argParam);
@@ -85,7 +88,7 @@ namespace ApiStackNet.API.Controllers
 
                     }
 
-                   
+
                 }
 
                 //orderbyList.Add(
@@ -95,7 +98,52 @@ namespace ApiStackNet.API.Controllers
             return WrappedOK(Service.List(lambda, query.PageNumber, query.PageSize, orderbyList));
         }
 
-        private BinaryExpression AppendQueryClause(ParameterExpression argParam, BinaryExpression andExp, Filter filter)
+        private Expression RecursiveAddFilter(Filter filter, ParameterExpression argParam, Expression parentExpression)
+        {
+
+            Expression exprToAppend = null;
+
+            if (filter.Inner != null && filter.Inner.Count > 0)
+            {
+
+                //Resolve as expression node
+                foreach (var inner in filter.Inner)
+                {
+                    var nodeExpr = RecursiveAddFilter(inner, argParam, exprToAppend);
+                    if (nodeExpr == null)
+                    {
+                        continue;
+                    }
+
+                    if (exprToAppend == null)
+                    {
+                        exprToAppend = nodeExpr;
+                    }
+                    else
+                    {
+                        if (inner.Conjunction == Conjunction.AND)
+                        {
+                            exprToAppend = Expression.AndAlso(exprToAppend, nodeExpr);
+                        }
+                        else
+                        {
+                            exprToAppend = Expression.OrElse(exprToAppend, nodeExpr);
+                        }
+                    }
+                    
+                }
+
+
+            }
+            else
+            {
+                exprToAppend = GetQueryClause(argParam, filter);
+            }
+
+            return exprToAppend;
+        }
+
+        private Expression  GetQueryClause(ParameterExpression argParam,  Filter filter)
         {
             MemberExpression nameProperty = null;
 
@@ -108,7 +156,7 @@ namespace ApiStackNet.API.Controllers
             {
                 //logger.Warn($"Filter error: field not valid: {e.Message}");
                 MessageService.AddWarning($"Filter error: field not valid: {e.Message}", UiMessageTarget.TOAST, "Filter Parser", "SFW_101", filter.Name);
-                return andExp;
+                return null;
             }
 
 
@@ -118,7 +166,7 @@ namespace ApiStackNet.API.Controllers
 
             if (filter.Comparator != QueryComparator.In)
             {
-            typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
+                typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
 
                 value = Expression.Constant(typedValue, nameProperty.Type);
             }
@@ -141,7 +189,7 @@ namespace ApiStackNet.API.Controllers
                     // Contains
                     var propertyExp = Expression.Property(argParam, filter.Name);
                     MethodInfo method = typeof(string).GetMethod("Contains", new Type[] { typeof(string) });
-                    var constant = Expression.Constant(value.Value, typeof(string));
+                    //var constant = Expression.Constant(value.Value, typeof(string));
                     clause = Expression.Call(propertyExp, method, Expression.Constant(value.Value));
                     break;
                 case QueryComparator.In:
@@ -157,20 +205,20 @@ namespace ApiStackNet.API.Controllers
 
                     if (!filterValues.EndsWith("]"))
                     {
-                        filterValues = String.Concat(filterValues,"]");
+                        filterValues = String.Concat(filterValues, "]");
                     }
 
                     var values = JArray.Parse(filterValues);
 
                     var listType = typeof(List<>).MakeGenericType(nameProperty.Type);
-                    var listInstance=Activator.CreateInstance(listType);
-                    
+                    var listInstance = Activator.CreateInstance(listType);
+
                     var addmethod = listType.GetMethod("Add");
-                    foreach(var val in values)
+                    foreach (var val in values)
                     {
                         var typedVal = val.ToObject(nameProperty.Type);
-                        addmethod.Invoke(listInstance,new object[] { typedVal });
-                     }
+                        addmethod.Invoke(listInstance, new object[] { typedVal });
+                    }
 
                     MethodInfo method2 = listType.GetMethod("Contains", new Type[] { nameProperty.Type });
                     clause = Expression.Call(Expression.Constant(listInstance), method2, propertyExp2);
@@ -179,15 +227,15 @@ namespace ApiStackNet.API.Controllers
                 default:
                     break;
             }
+           
 
-            if (filter.Conjunction == Conjunction.AND)
-            {
-            andExp = Expression.AndAlso(andExp, clause);
-            }
-            else { 
-                andExp = Expression.OrElse(andExp, clause);
-            }
-            return andExp;
+
+         
+
+
+           
+
+            return clause;
         }
     }
 

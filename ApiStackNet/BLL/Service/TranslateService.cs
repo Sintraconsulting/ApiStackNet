@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Resources;
 using System.Web;
 
+
 namespace ApiStackNet.BLL.Service
 {
     public class TranslateService
