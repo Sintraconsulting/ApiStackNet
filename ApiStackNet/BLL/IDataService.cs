@@ -93,18 +93,10 @@ where DTO : BaseEntity<PK>
                 internalItem = InternalUpdate(entity, internalItem);
             }
 
-            try
+            if (saveChanges)
             {
-                if (saveChanges)
-                {
-                    dbContext.SaveChanges();
-                }
-            } catch (Exception e)
-            {
-
+                dbContext.SaveChanges();
             }
-
-
             return internalItem;
         }
 
