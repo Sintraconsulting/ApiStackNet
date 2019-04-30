@@ -166,16 +166,9 @@ namespace ApiStackNet.API.Controllers
 
             if (filter.Comparator != QueryComparator.In)
             {
-                try
-                {
-                    typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
+                typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
 
-                    value = Expression.Constant(typedValue, nameProperty.Type);
-                } catch (Exception e)
-                {
-
-                }
-
+                value = Expression.Constant(typedValue, nameProperty.Type);
             }
 
             Expression clause = null;
