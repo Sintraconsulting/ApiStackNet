@@ -228,14 +228,7 @@ namespace ApiStackNet.API.Controllers
                     break;
             }
 
-            if (filter.Conjunction == Conjunction.AND)
-            {
-                andExp = Expression.AndAlso(andExp, clause);
-            }
-            else { 
-                andExp = Expression.OrElse(andExp, clause);
-            }
-            return andExp;
+            return clause;
         }
     }
 
