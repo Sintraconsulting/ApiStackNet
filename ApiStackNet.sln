@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStackNet", "ApiStackNet\ApiStackNet.csproj", "{1CB965AE-BC53-4072-B38F-F01E31D0127F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStackNet.Demo", "ApiStackNet.Demo\ApiStackNet.Demo.csproj", "{5F1B8ABC-CA04-4CA9-BF4C-63312522C0BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStackNetTest", "ApiStackNetTest\ApiStackNetTest.csproj", "{FB27A94A-9A16-4DD3-9E59-E17E201D598C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1CB965AE-BC53-4072-B38F-F01E31D0127F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CB965AE-BC53-4072-B38F-F01E31D0127F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CB965AE-BC53-4072-B38F-F01E31D0127F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F1B8ABC-CA04-4CA9-BF4C-63312522C0BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F1B8ABC-CA04-4CA9-BF4C-63312522C0BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F1B8ABC-CA04-4CA9-BF4C-63312522C0BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F1B8ABC-CA04-4CA9-BF4C-63312522C0BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB27A94A-9A16-4DD3-9E59-E17E201D598C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB27A94A-9A16-4DD3-9E59-E17E201D598C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB27A94A-9A16-4DD3-9E59-E17E201D598C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB27A94A-9A16-4DD3-9E59-E17E201D598C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
