@@ -227,15 +227,15 @@ namespace ApiStackNet.API.Controllers
                 default:
                     break;
             }
-           
 
-
-         
-
-
-           
-
-            return clause;
+            if (filter.Conjunction == Conjunction.AND)
+            {
+                andExp = Expression.AndAlso(andExp, clause);
+            }
+            else { 
+                andExp = Expression.OrElse(andExp, clause);
+            }
+            return andExp;
         }
     }
 
