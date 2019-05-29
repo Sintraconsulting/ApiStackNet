@@ -88,6 +88,7 @@ namespace ApiStackNet.DAL
 
                     if (item.State == EntityState.Deleted)
                     {
+                        item.Reload();
                         item.State = EntityState.Modified;
                         SetValueOnAuditableEntity(item.Entity, "Active", false);
                         SetValueOnAuditableEntity(item.Entity, "DeletedOn", DateTime.Now);

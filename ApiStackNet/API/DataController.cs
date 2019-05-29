@@ -118,7 +118,7 @@ namespace ApiStackNet.API.Controllers
 
             if (filter.Comparator != QueryComparator.In)
             {
-            typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
+                typedValue = ConversionHelper.StringToObject(filter.Value, nameProperty.Type);
 
                 value = Expression.Constant(typedValue, nameProperty.Type);
             }
@@ -182,7 +182,7 @@ namespace ApiStackNet.API.Controllers
 
             if (filter.Conjunction == Conjunction.AND)
             {
-            andExp = Expression.AndAlso(andExp, clause);
+                andExp = Expression.AndAlso(andExp, clause);
             }
             else { 
                 andExp = Expression.OrElse(andExp, clause);
