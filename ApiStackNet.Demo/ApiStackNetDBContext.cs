@@ -10,7 +10,7 @@ namespace ApiStackNet.Demo
 {
     public class ApiStackNetDBContext:ApiStackDbContext
     {
-        public ApiStackNetDBContext() : base("ApiStackNetDBContext")
+        public ApiStackNetDBContext() : base("ApiStackNetDatabase")
         {
             Database.SetInitializer<ApiStackNetDBContext>(null);
             this.Configuration.LazyLoadingEnabled = false;

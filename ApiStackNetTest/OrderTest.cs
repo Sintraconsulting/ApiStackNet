@@ -15,20 +15,29 @@ namespace ApiStackNetXUnitTest
         public void GetOrderByIdTest()
         {
             int i = 1;
+            bool check = false;
 
             try
             {
                 Order order = this.DbContext.Order.Find(i);
+                if (order != null)
+                {
+                    check = true;
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+
+            Assert.True(check);
         }
 
         [Fact]
         public void SaveOrderTest()
         {
+            bool check = false;
+
             OrderBO orderBO = new OrderBO()
             {
                 UserId = 1,
@@ -43,62 +52,79 @@ namespace ApiStackNetXUnitTest
             try
             {
                 OrderDTO orderDTO = OrderDataService.SaveOrder(orderBO);
+                if (orderDTO != null)
+                {
+                    check = true;
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+
+            Assert.True(check);
         }
 
         [Fact]
         public void GetOrdersListTest()
         {
+            bool check = false;
+
             try
             {
                 List<OrderDTO> ordersDTOList = OrderDataService.GetOrdersList();
+                if (ordersDTOList != null)
+                {
+                    check = true;
+                }
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
+
+            Assert.True(check);
         }
 
-        [Fact]
-        public void CRUDTest()
-        {
-            //SAVE
-            OrderBO orderBO = new OrderBO()
-            {
-                UserId = 1,
-                UserName = "Chiara",
-                Email = "c.bernardini@sintraconsulting.eu",
-                OrderDesc = "T-Shirt",
-                Price = 20.00,
-                Address = "Via Fratelli Lumiere, 19, 52100 Arezzo AR"
-            };
+        //TODO: Rendere specifici i singoli test
+        //
+        //[Fact]
+        //public void CRUDTest()
+        //{
+        //    //SAVE
+        //    OrderBO orderBO = new OrderBO()
+        //    {
+        //        UserId = 1,
+        //        UserName = "Chiara",
+        //        Email = "c.bernardini@sintraconsulting.eu",
+        //        OrderDesc = "T-Shirt",
+        //        Price = 20.00,
+        //        Address = "Via Fratelli Lumiere, 19, 52100 Arezzo AR"
+        //    };
 
-            OrderDTO newOrderDTO = OrderDataService.Save(orderBO);
+        //    OrderDTO newOrderDTO = OrderDataService.Save(orderBO);
 
 
-            //DELETE FROM ID
-            bool orderDeletedFromId = OrderDataService.Delete(newOrderDTO.Id);
+        //    //DELETE FROM ID
+        //    bool orderDeletedFromId = OrderDataService.Delete(newOrderDTO.Id);
 
-            //SAVE
-            OrderBO orderBO2 = new OrderBO()
-            {
-                UserId = 1,
-                UserName = "Chiara",
-                Email = "c.bernardini@sintraconsulting.eu",
-                OrderDesc = "T-Shirt",
-                Price = 20.00,
-                Address = "Via Fratelli Lumiere, 19, 52100 Arezzo AR"
-            };
+        //    //SAVE
+        //    OrderBO orderBO2 = new OrderBO()
+        //    {
+        //        UserId = 1,
+        //        UserName = "Chiara",
+        //        Email = "c.bernardini@sintraconsulting.eu",
+        //        OrderDesc = "T-Shirt",
+        //        Price = 20.00,
+        //        Address = "Via Fratelli Lumiere, 19, 52100 Arezzo AR"
+        //    };
 
-            OrderDTO newOrderDTO2 = OrderDataService.Save(orderBO2);
+        //    OrderDTO newOrderDTO2 = OrderDataService.Save(orderBO2);
 
-            //DELETE FROM DTO
-            bool orderDeletedFromDTO = OrderDataService.Delete(newOrderDTO2);
+        //    //DELETE FROM DTO
+        //    bool orderDeletedFromDTO = OrderDataService.Delete(newOrderDTO2);
 
-        }
+        //}
     }
 }
