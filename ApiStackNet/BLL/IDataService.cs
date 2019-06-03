@@ -45,8 +45,10 @@ where DTO : BaseEntity<PK>
                     i = 0;
                     dbContext.SaveChanges();
                 }
+                i++;
             }
 
+            dbContext.SaveChanges();
             return true;
         }
 
@@ -62,8 +64,10 @@ where DTO : BaseEntity<PK>
                     i = 0;
                     dbContext.SaveChanges();
                 }
+                i++;
             }
 
+            dbContext.SaveChanges();
             return true;
         }
 
