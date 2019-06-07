@@ -8,7 +8,7 @@ using System.Web;
 
 namespace ApiStackNet.Demo
 {
-    public class ApiStackNetDBContext:ApiStackDbContext
+    public class ApiStackNetDBContext : ApiStackDbContext
     {
         public ApiStackNetDBContext() : base("ApiStackNetDatabase")
         {
@@ -26,5 +26,6 @@ namespace ApiStackNet.Demo
         public DbSet<Product> Product { get; set; }
 
         public DbSet<OrderDetail> OrderDetail { get; set; }
+
     }
 }

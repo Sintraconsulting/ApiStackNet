@@ -8,11 +8,11 @@ using System.Web;
 
 namespace ApiStackNet.Demo.BO2EMapping
 {
-    public class OrderBO2EMapping : Profile
+    public class ProductBO2EMapping : Profile
     {
-        public OrderBO2EMapping()
+        public ProductBO2EMapping()
         {
-            CreateMap<OrderBO, Order>(); //NO reverse map.ReverseMap();
+            CreateMap<ProductBO, Product>(); //NO reverse map.ReverseMap();
         }
     }
 }

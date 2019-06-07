@@ -9,10 +9,10 @@ namespace ApiStackNet.Demo.DTO
     {
         public int UserId { get; set; }
 
-        public int OrderId { get; set; }
+        public string Name { get; set; }
 
-        public int ProductId { get; set; }
+        public string Address { get; set; }
 
-        public double Quantity { get; set; }
+        public string Email { get; set; }
     }
 }
