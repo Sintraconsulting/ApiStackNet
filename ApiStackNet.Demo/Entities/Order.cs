@@ -11,16 +11,19 @@ namespace ApiStackNet.Demo.Entities
     [Table("ORDER", Schema = "DBO")]
     public class Order : AuditableEntity<Int32>
     {
+        [Column("USER_ID")]
         public int UserId { get; set; }
 
-        public string UserName { get; set; }
+        [Column("DATA")]
+        public DateTime Data { get; set; }
 
-        public string Email { get; set; }
+        [Column("AMOUNT")]
+        public double Amount { get; set; }
 
-        public string OrderDesc { get; set; }
 
-        public double Price { get; set; }
+        // --- FK
 
-        public string Address { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
     }
 }

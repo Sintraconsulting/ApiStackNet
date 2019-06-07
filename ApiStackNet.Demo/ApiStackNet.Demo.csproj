@@ -201,17 +201,20 @@
     <Compile Include="BLL\OrderDataService.cs" />
     <Compile Include="BO\BO2EMapping\OrderBO2EMapping.cs" />
     <Compile Include="BO\OrderBO.cs" />
-    <Compile Include="Controllers\Api\MyTableController.cs" />
-    <Compile Include="BLL\MyTableDataService.cs" />
-    <Compile Include="BO\BO2EMapping\MyTableBO2EMapping.cs" />
-    <Compile Include="BO\MyTableBO.cs" />
+    <Compile Include="BO\OrderDetailBO.cs" />
+    <Compile Include="BO\ProductBO.cs" />
+    <Compile Include="BO\UserBO.cs" />
     <Compile Include="Controllers\Api\OrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />
-    <Compile Include="DTO\MyTableDTO.cs" />
+    <Compile Include="DTO\OrderDetailDTO.cs" />
     <Compile Include="DTO\OrderDTO.cs" />
-    <Compile Include="Entities\MyTable.cs" />
+    <Compile Include="DTO\ProductDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderDetail.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

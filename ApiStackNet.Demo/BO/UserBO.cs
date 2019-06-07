@@ -6,12 +6,14 @@ using System.Web;
 
 namespace ApiStackNet.Demo.BO
 {
-    public class OrderBO : BaseEntity<Int32>
+    public class UserBO : BaseEntity<Int32>
     {
         public int UserId { get; set; }
 
-        public DateTime Data { get; set; }
+        public int OrderId { get; set; }
 
-        public double Amount { get; set; }
+        public int ProductId { get; set; }
+
+        public double Quantity { get; set; }
     }
 }

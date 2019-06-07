@@ -29,7 +29,6 @@ namespace ApiStackNet.Demo.App_Start
             builder.RegisterWebApiFilterProvider(config);
             
             builder.RegisterType<ApiStackNetDBContext>().As<DbContext>().InstancePerRequest();
-            builder.RegisterType<MyTableDataService>().AsSelf().InstancePerRequest();
             builder.RegisterType<OrderDataService>().AsSelf().InstancePerRequest();
             builder.RegisterType<MessageService>().AsSelf().InstancePerRequest();
             builder.RegisterModule(new MapperInstaller());
