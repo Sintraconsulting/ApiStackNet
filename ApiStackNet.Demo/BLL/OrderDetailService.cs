@@ -45,7 +45,7 @@ namespace ApiStackNet.Demo.BLL.Services
             return ordersDetailList;
         }
 
-        public OrderDetailDTO EditProduct(OrderDetailBO orderDetailBO)
+        public OrderDetailDTO EditOrderDetail(OrderDetailBO orderDetailBO)
         {
             OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
 

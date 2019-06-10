@@ -12,6 +12,7 @@ using System.Web.Http;
 
 namespace ApiStackNet.Demo.Controllers.Api
 {
+    [RoutePrefix("api/product")]
     public class ProductController : DataController<ProductService, ProductDTO, ProductBO, Product, int>
     {
         private ProductService ProductService;
@@ -30,7 +31,7 @@ namespace ApiStackNet.Demo.Controllers.Api
 
         [HttpGet]
         [Route("product-list")]
-        public WrappedResponse<List<ProductDTO>> GetUsersList()
+        public WrappedResponse<List<ProductDTO>> GetProductsList()
         {
             return WrappedOK(this.ProductService.GetProductsList());
         }
@@ -43,7 +44,7 @@ namespace ApiStackNet.Demo.Controllers.Api
         }
 
         [HttpDelete]
-        [Route("delete")]
+        [Route("delete/{id}")]
         public override WrappedResponse<bool> Delete(int Id)
         {
             return base.Delete(Id);
@@ -51,7 +52,7 @@ namespace ApiStackNet.Demo.Controllers.Api
 
         [HttpDelete]
         [Route("delete")]
-        public WrappedResponse<bool> DeleteUserByEntity(Product product)
+        public WrappedResponse<bool> DeleteProductByEntity(Product product)
         {
             return base.Delete(product.Id);
         }

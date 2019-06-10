@@ -12,7 +12,7 @@ namespace ApiStackNet.Demo.BO
 
         public string Name { get; set; }
 
-        public int Address { get; set; }
+        public string Address { get; set; }
 
         public string Email { get; set; }
     }

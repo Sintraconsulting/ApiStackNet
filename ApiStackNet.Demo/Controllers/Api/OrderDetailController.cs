@@ -12,6 +12,7 @@ using System.Web.Http;
 
 namespace ApiStackNet.Demo.Controllers.Api
 {
+    [RoutePrefix("api/order_detail")]
     public class OrderDetailController : DataController<OrderDetailService, OrderDetailDTO, OrderDetailBO, OrderDetail, int>
     {
         private OrderDetailService OrderDetailService;
@@ -30,20 +31,20 @@ namespace ApiStackNet.Demo.Controllers.Api
 
         [HttpGet]
         [Route("order_detail-list")]
-        public WrappedResponse<List<OrderDetailDTO>> GetUsersList()
+        public WrappedResponse<List<OrderDetailDTO>> GetOrdersDetailList()
         {
             return WrappedOK(this.OrderDetailService.GetProductsList());
         }
 
         [HttpPost]
         [Route("save")]
-        public WrappedResponse<OrderDetailDTO> SaveProduct(OrderDetailBO orderDetailBO)
+        public WrappedResponse<OrderDetailDTO> SaveOrderDetail(OrderDetailBO orderDetailBO)
         {
             return WrappedOK(this.OrderDetailService.SaveOrderDetail(orderDetailBO));
         }
 
         [HttpDelete]
-        [Route("delete")]
+        [Route("delete/{id}")]
         public override WrappedResponse<bool> Delete(int Id)
         {
             return base.Delete(Id);
@@ -51,14 +52,14 @@ namespace ApiStackNet.Demo.Controllers.Api
 
         [HttpDelete]
         [Route("delete")]
-        public WrappedResponse<bool> DeleteUserByEntity(OrderDetail orderDetail)
+        public WrappedResponse<bool> DeleteOrderDetailByEntity(OrderDetail orderDetail)
         {
             return base.Delete(orderDetail.Id);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public WrappedResponse<OrderDetailDTO> EditProduct(OrderDetailBO orderDetailBO)
+        public WrappedResponse<OrderDetailDTO> EditOrderDetail(OrderDetailBO orderDetailBO)
         {
             return WrappedOK(this.OrderDetailService.EditOrderDetail(orderDetailBO));
         }

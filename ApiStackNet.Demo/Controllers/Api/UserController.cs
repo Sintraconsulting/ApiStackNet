@@ -12,6 +12,7 @@ using System.Web.Http;
 
 namespace ApiStackNet.Demo.Controllers.Api
 {
+    [RoutePrefix("api/user")]
     public class UserController : DataController<UserService, UserDTO, UserBO, User, int>
     {
         private UserService UserService;
@@ -43,7 +44,7 @@ namespace ApiStackNet.Demo.Controllers.Api
         }
         
         [HttpDelete]
-        [Route("delete")]
+        [Route("delete/{id}")]
         public override WrappedResponse<bool> Delete(int Id)
         {
             return base.Delete(Id);

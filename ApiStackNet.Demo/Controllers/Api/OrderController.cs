@@ -38,13 +38,13 @@ namespace ApiStackNet.Demo.Controllers.Api
 
         [HttpPost]
         [Route("save")]
-        public WrappedResponse<OrderDTO> SaveOrder(OrderBO myTableBO)
+        public WrappedResponse<OrderDTO> SaveOrder(OrderBO orderBO)
         {
-            return WrappedOK(this.OrderService.SaveOrder(myTableBO));
+            return WrappedOK(this.OrderService.SaveOrder(orderBO));
         }
 
         [HttpDelete]
-        [Route("delete")]
+        [Route("delete/{id}")]
         public override WrappedResponse<bool> Delete(int Id)
         {
             return base.Delete(Id);
@@ -52,14 +52,14 @@ namespace ApiStackNet.Demo.Controllers.Api
 
         [HttpDelete]
         [Route("delete")]
-        public WrappedResponse<bool> DeleteUserByEntity(Order order)
+        public WrappedResponse<bool> DeleteOrderByEntity(Order order)
         {
             return base.Delete(order.Id);
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public WrappedResponse<OrderDTO> EditUser(OrderBO orderBO)
+        [Route("edit/{id}")]
+        public WrappedResponse<OrderDTO> EditOrder(OrderBO orderBO)
         {
             return WrappedOK(this.OrderService.EditOrder(orderBO));
         }
