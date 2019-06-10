@@ -224,6 +224,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\BO2EMapping\OrderBO2EMapping.cs" />
+    <Compile Include="Mapping\BO2EMapping\OrderDetailBO2EMapping.cs" />
+    <Compile Include="Mapping\BO2EMapping\ProductBO2EMapping.cs" />
+    <Compile Include="Mapping\BO2EMapping\UserBO2EMapping.cs" />
+    <Compile Include="Mapping\E2DTOMapping\OrderDetailE2DTOMapping.cs" />
+    <Compile Include="Mapping\E2DTOMapping\OrderE2DTOMapping.cs" />
+    <Compile Include="Mapping\E2DTOMapping\ProductE2DTOMapping.cs" />
+    <Compile Include="Mapping\E2DTOMapping\UserE2DTOMapping.cs" />
     <Compile Include="Migrations\201903261156439_createMyTable.cs" />
     <Compile Include="Migrations\201903261156439_createMyTable.Designer.cs">
       <DependentUpon>201903261156439_createMyTable.cs</DependentUpon>
