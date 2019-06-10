@@ -1,17 +1,45 @@
-﻿using System;
+﻿using ApiStackNet.API.Controllers;
+using ApiStackNet.API.Model;
+using ApiStackNet.Demo.BLL.Services;
+using ApiStackNet.Demo.BO;
+using ApiStackNet.Demo.DTO;
+using ApiStackNet.Demo.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace ApiStackNet.Demo.Controllers.Api
 {
-    public class UserController : Controller
+    public class UserController : DataController<UserService, UserDTO, UserBO, User, int>
     {
-        // GET: User
-        public ActionResult Index()
+        private UserService UserService;
+
+        public UserController(UserService service) : base(service)
         {
-            return View();
+            this.UserService = service;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public WrappedResponse<UserDTO> GetById([FromUri] int id)
+        {
+            return WrappedOK(this.UserService.GetById(id));
+        }
+
+        [HttpPost]
+        [Route("save")]
+        public WrappedResponse<UserDTO> SaveUser(UserBO userBO)
+        {
+            return WrappedOK(this.UserService.SaveUser(userBO));
+        }
+
+        [HttpGet]
+        [Route("user-list")]
+        public WrappedResponse<List<UserDTO>> GetUsersList()
+        {
+            return WrappedOK(this.UserService.GetUsersList());
         }
     }
 }

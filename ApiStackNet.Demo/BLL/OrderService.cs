@@ -11,14 +11,14 @@ using System.Web;
 
 namespace ApiStackNet.Demo.BLL.Services
 {
-    public class OrderDataService : IntDataService<OrderDTO, OrderBO, Order>
+    public class OrderService : IntDataService<OrderDTO, OrderBO, Order>
     {
         public override IQueryable<Order> GetQueriable()
         {
             return base.GetQueriable().Where(x => x.Active == true);
         }
 
-        public OrderDataService(DbContext context, IMapper mapper) : base(context, mapper)
+        public OrderService(DbContext context, IMapper mapper) : base(context, mapper)
         {
 
         }

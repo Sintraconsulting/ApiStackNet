@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ApiStackNet.Demo.BO2EMapping
+namespace ApiStackNet.Demo.Mapping.BO2EMapping
 {
     public class UserBO2EMapping : Profile
     {

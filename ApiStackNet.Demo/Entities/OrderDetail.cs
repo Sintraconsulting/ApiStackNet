@@ -9,7 +9,7 @@ namespace ApiStackNet.Demo.Entities
 {
 
     [Table("ORDER_DETAIL", Schema = "DBO")]
-    public class OrderDetail : BaseEntity<Int32>
+    public class OrderDetail : AuditableEntity<Int32>
     {
         [Column("ORDER_ID")]
         public int OrderId { get; set; }

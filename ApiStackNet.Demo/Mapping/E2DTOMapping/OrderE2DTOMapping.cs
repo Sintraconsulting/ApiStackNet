@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ApiStackNet.Demo.E2DTOMapping
+namespace ApiStackNet.Demo.Mapping.E2DTOMapping
 {
     public class OrderE2DTOMapping : Profile
     {

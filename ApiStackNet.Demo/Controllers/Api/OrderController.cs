@@ -13,34 +13,34 @@ using System.Web.Http;
 namespace ApiStackNet.Demo.Controllers.Api
 {
     [RoutePrefix("api/order")]
-    public class OrderController : DataController<OrderDataService, OrderDTO, OrderBO, Order, int>
+    public class OrderController : DataController<OrderService, OrderDTO, OrderBO, Order, int>
     {
-        private OrderDataService OrderDataService;
+        private OrderService OrderService;
 
-        public OrderController(OrderDataService service) : base(service)
+        public OrderController(OrderService service) : base(service)
         {
-            this.OrderDataService = service;
+            this.OrderService = service;
         }
 
         [HttpGet]
         [Route("{id}")]
         public WrappedResponse<OrderDTO> GetById([FromUri] int id)
         {
-            return WrappedOK(this.OrderDataService.GetById(id));
+            return WrappedOK(this.OrderService.GetById(id));
         }
 
         [HttpPost]
         [Route("save")]
         public WrappedResponse<OrderDTO> SaveOrder(OrderBO myTableBO)
         {
-            return WrappedOK(this.OrderDataService.SaveOrder(myTableBO));
+            return WrappedOK(this.OrderService.SaveOrder(myTableBO));
         }
 
         [HttpGet]
         [Route("order-list")]
         public WrappedResponse<List<OrderDTO>> GetOrdersList()
         {
-            return WrappedOK(this.OrderDataService.GetOrdersList());
+            return WrappedOK(this.OrderService.GetOrdersList());
         }
     }
 }
