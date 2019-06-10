@@ -28,18 +28,39 @@ namespace ApiStackNet.Demo.Controllers.Api
             return WrappedOK(this.UserService.GetById(id));
         }
 
+        [HttpGet]
+        [Route("user-list")]
+        public WrappedResponse<List<UserDTO>> GetUsersList()
+        {
+            return WrappedOK(this.UserService.GetUsersList());
+        }
+
         [HttpPost]
         [Route("save")]
         public WrappedResponse<UserDTO> SaveUser(UserBO userBO)
         {
             return WrappedOK(this.UserService.SaveUser(userBO));
         }
-
-        [HttpGet]
-        [Route("user-list")]
-        public WrappedResponse<List<UserDTO>> GetUsersList()
+        
+        [HttpDelete]
+        [Route("delete")]
+        public override WrappedResponse<bool> Delete(int Id)
         {
-            return WrappedOK(this.UserService.GetUsersList());
+            return base.Delete(Id);
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public WrappedResponse<bool> DeleteUserByEntity(User user)
+        {
+            return base.Delete(user.Id);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public WrappedResponse<UserDTO> EditUser(UserBO user)
+        {
+            return WrappedOK(this.UserService.EditUser(user));
         }
     }
 }

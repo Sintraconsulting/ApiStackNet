@@ -29,6 +29,13 @@ namespace ApiStackNet.Demo.Controllers.Api
             return WrappedOK(this.OrderService.GetById(id));
         }
 
+        [HttpGet]
+        [Route("order-list")]
+        public WrappedResponse<List<OrderDTO>> GetOrdersList()
+        {
+            return WrappedOK(this.OrderService.GetOrdersList());
+        }
+
         [HttpPost]
         [Route("save")]
         public WrappedResponse<OrderDTO> SaveOrder(OrderBO myTableBO)
@@ -36,11 +43,25 @@ namespace ApiStackNet.Demo.Controllers.Api
             return WrappedOK(this.OrderService.SaveOrder(myTableBO));
         }
 
-        [HttpGet]
-        [Route("order-list")]
-        public WrappedResponse<List<OrderDTO>> GetOrdersList()
+        [HttpDelete]
+        [Route("delete")]
+        public override WrappedResponse<bool> Delete(int Id)
         {
-            return WrappedOK(this.OrderService.GetOrdersList());
+            return base.Delete(Id);
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public WrappedResponse<bool> DeleteUserByEntity(Order order)
+        {
+            return base.Delete(order.Id);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public WrappedResponse<OrderDTO> EditUser(OrderBO orderBO)
+        {
+            return WrappedOK(this.OrderService.EditOrder(orderBO));
         }
     }
 }

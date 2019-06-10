@@ -44,5 +44,14 @@ namespace ApiStackNet.Demo.BLL.Services
 
             return productsList;
         }
+
+        public ProductDTO EditProduct(ProductBO productBO)
+        {
+            ProductDTO productDTO = new ProductDTO();
+
+            Product product = this.GetQueriable().FirstOrDefault(x => x.Id == productBO.Id);
+
+            return productDTO = this.Save(productBO);
+        }
     }
 }

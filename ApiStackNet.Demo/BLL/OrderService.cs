@@ -44,5 +44,14 @@ namespace ApiStackNet.Demo.BLL.Services
 
             return ordersList;
         }
+
+        public OrderDTO EditOrder(OrderBO orderBO)
+        {
+            OrderDTO orderDTO = new OrderDTO();
+
+            Order order = this.GetQueriable().FirstOrDefault(x => x.Id == orderBO.Id);
+
+            return orderDTO = this.Save(orderBO);
+        }
     }
 }

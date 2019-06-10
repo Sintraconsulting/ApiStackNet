@@ -28,6 +28,13 @@ namespace ApiStackNet.Demo.Controllers.Api
             return WrappedOK(this.ProductService.GetById(id));
         }
 
+        [HttpGet]
+        [Route("product-list")]
+        public WrappedResponse<List<ProductDTO>> GetUsersList()
+        {
+            return WrappedOK(this.ProductService.GetProductsList());
+        }
+
         [HttpPost]
         [Route("save")]
         public WrappedResponse<ProductDTO> SaveProduct(ProductBO productBO)
@@ -35,11 +42,25 @@ namespace ApiStackNet.Demo.Controllers.Api
             return WrappedOK(this.ProductService.SaveProduct(productBO));
         }
 
-        [HttpGet]
-        [Route("product-list")]
-        public WrappedResponse<List<ProductDTO>> GetUsersList()
+        [HttpDelete]
+        [Route("delete")]
+        public override WrappedResponse<bool> Delete(int Id)
         {
-            return WrappedOK(this.ProductService.GetProductsList());
+            return base.Delete(Id);
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public WrappedResponse<bool> DeleteUserByEntity(Product product)
+        {
+            return base.Delete(product.Id);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public WrappedResponse<ProductDTO> EditProduct(ProductBO productBO)
+        {
+            return WrappedOK(this.ProductService.EditProduct(productBO));
         }
     }
 }

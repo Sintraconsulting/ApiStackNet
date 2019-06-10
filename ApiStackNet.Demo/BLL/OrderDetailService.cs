@@ -22,5 +22,36 @@ namespace ApiStackNet.Demo.BLL.Services
         {
 
         }
+
+        public OrderDetailDTO SaveOrderDetail(OrderDetailBO orderDetailBO)
+        {
+            OrderDetailDTO orderDetailDTO = base.Save(orderDetailBO);
+
+            return orderDetailDTO;
+        }
+
+        public List<OrderDetailDTO> GetProductsList()
+        {
+            List<OrderDetailDTO> ordersDetailList = new List<OrderDetailDTO>();
+
+            var ordersDetail = this.GetQueriable().ToList();
+
+            foreach (OrderDetail orderDetail in ordersDetail)
+            {
+                OrderDetailDTO orderDetailDTO = mapper.Map<OrderDetail, OrderDetailDTO>(orderDetail);
+                ordersDetailList.Add(orderDetailDTO);
+            }
+
+            return ordersDetailList;
+        }
+
+        public OrderDetailDTO EditProduct(OrderDetailBO orderDetailBO)
+        {
+            OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
+
+            OrderDetail orderDetail = this.GetQueriable().FirstOrDefault(x => x.Id == orderDetailBO.Id);
+
+            return orderDetailDTO = this.Save(orderDetailBO);
+        }
     }
 }

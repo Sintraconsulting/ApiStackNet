@@ -44,5 +44,15 @@ namespace ApiStackNet.Demo.BLL.Services
 
             return usersList;
         }
+
+        public UserDTO EditUser(UserBO userBO)
+        {
+            UserDTO userDTO = new UserDTO();
+
+            User user = this.GetQueriable().FirstOrDefault(x => x.Id == userBO.Id);
+
+            return userDTO = this.Save(userBO);
+        }
+
     }
 }

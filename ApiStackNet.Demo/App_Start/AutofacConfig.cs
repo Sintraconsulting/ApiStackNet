@@ -32,6 +32,7 @@ namespace ApiStackNet.Demo.App_Start
             builder.RegisterType<OrderService>().AsSelf().InstancePerRequest();
             builder.RegisterType<UserService>().AsSelf().InstancePerRequest();
             builder.RegisterType<ProductService>().AsSelf().InstancePerRequest();
+            builder.RegisterType<OrderDetailService>().AsSelf().InstancePerRequest();
             builder.RegisterType<MessageService>().AsSelf().InstancePerRequest();
             builder.RegisterModule(new MapperInstaller());
 
