@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace ApiStackNet.Demo.Controllers
 {
-    public class ReadmeController : Controller
+    public class ReadmeFileController : Controller
     {
-        public ReadmeController()
+        public ReadmeFileController()
         {
 
         }

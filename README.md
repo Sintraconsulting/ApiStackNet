@@ -9,7 +9,14 @@ TODO: Guide users through getting your code up and running on their own system. 
 4.	API references
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+TEST Postman:
+The following tips refer to those test that need an "hand configuration" before to proceed: 
+- GetById: set in the Request url bar the Id of the entity to get;
+- GetList: just send the request to run the test;
+- Edit: set in the Request url bar the Id of the entity to edit and check the corrispondence between the hand setted Id and the parameter "Id" in the body of the request;
+- Save: just send the request to run the test, using the json in the body;
+- Delete: set in the Request url bar the Id of the entity to delete;
+- DeleteByEntity: just send the request to run the test, using the json in the body.
 
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 
