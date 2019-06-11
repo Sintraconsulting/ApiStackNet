@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ApiStackNet.Demo.DTO
 {
-    public class OrderDetailDTO : BaseEntity<Int32>
+    public class OrderDetailDTO : AuditableEntity<Int32>
     {
         public int OrderId { get; set; }
 

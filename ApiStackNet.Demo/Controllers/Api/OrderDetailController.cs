@@ -58,7 +58,7 @@ namespace ApiStackNet.Demo.Controllers.Api
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("edit/{id}")]
         public WrappedResponse<OrderDetailDTO> EditOrderDetail(OrderDetailBO orderDetailBO)
         {
             return WrappedOK(this.OrderDetailService.EditOrderDetail(orderDetailBO));

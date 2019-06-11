@@ -1,0 +1,584 @@
+﻿{
+  "info": {
+    "_postman_id": "30cba5a0-f376-49d4-b2b9-f024b7022b6f",
+    "name": "ApiStackDemo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Order",
+      "item": [
+        {
+          "name": "GetOrderById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}order/39",
+              "host": [
+                "{{url}}order"
+              ],
+              "path": [
+                "39"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetOrdersList",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}order/order-list",
+              "host": [
+                "{{url}}order"
+              ],
+              "path": [
+                "order-list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SaveOrder",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"OrderId\": 1,\r\n  \"UserId\": 1,\r\n  \"Data\": \"2019-06-10T14:53:08.644Z\",\r\n  \"Amount\": 2,\r\n  \"Id\": 39\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}order/save",
+              "host": [
+                "{{url}}order"
+              ],
+              "path": [
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditOrder",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"OrderId\": 2,\r\n  \"UserId\": 1,\r\n  \"Data\": \"2019-06-10T14:53:08.643Z\",\r\n  \"Amount\": 5,\r\n  \"Id\": 39\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}order/edit/39",
+              "host": [
+                "{{url}}order"
+              ],
+              "path": [
+                "edit",
+                "39"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteOrder",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}order/delete/41",
+              "host": [
+                "{{url}}order"
+              ],
+              "path": [
+                "delete",
+                "41"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteOrderByEntity",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n      \"OrderId\": 1,\r\n      \"UserId\": 1,\r\n      \"Data\": \"2019-06-10T14:53:08.643\",\r\n      \"Amount\": 3,\r\n      \"CreatedOn\": \"2019-06-10T17:13:58.71\",\r\n      \"ModifiedOn\": \"2019-06-10T17:13:58.71\",\r\n      \"DeletedOn\": \"1753-01-01T00:00:00\",\r\n      \"CreatedBy\": null,\r\n      \"ModifiedBy\": null,\r\n      \"DeletedBy\": null,\r\n      \"Active\": true,\r\n      \"Id\": 48\r\n    }"
+            },
+            "url": {
+              "raw": "{{url}}order/delete",
+              "host": [
+                "{{url}}order"
+              ],
+              "path": [
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "GetProductById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}product/2",
+              "host": [
+                "{{url}}product"
+              ],
+              "path": [
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetProductsList",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}product/product-list",
+              "host": [
+                "{{url}}product"
+              ],
+              "path": [
+                "product-list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SaveProduct",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ProductId\": 28,\r\n  \"Desc\": \"postman_req\",\r\n  \"Price\": 99\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}product/save",
+              "host": [
+                "{{url}}product"
+              ],
+              "path": [
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditProduct",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ProductId\": 7,\r\n  \"Desc\": \"test_edit\",\r\n  \"Price\": 25,\r\n  \"Id\": 2\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}product/edit/2",
+              "host": [
+                "{{url}}product"
+              ],
+              "path": [
+                "edit",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteProduct",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}product/delete/2",
+              "host": [
+                "{{url}}product"
+              ],
+              "path": [
+                "delete",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteOrderByEntity",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ProductId\": 5,\r\n    \"Desc\": \"test\",\r\n    \"Price\": 22,\r\n    \"CreatedOn\": \"2019-06-11T09:20:54.647\",\r\n    \"ModifiedOn\": \"2019-06-11T09:20:54.647\",\r\n    \"DeletedOn\": \"1753-01-01T00:00:00\",\r\n    \"CreatedBy\": null,\r\n    \"ModifiedBy\": null,\r\n    \"DeletedBy\": null,\r\n    \"Active\": true,\r\n    \"Id\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}product/delete",
+              "host": [
+                "{{url}}product"
+              ],
+              "path": [
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "GetUserById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}user/1",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetUsersList",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}user/user-list",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "user-list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SaveUser",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"UserId\": 4,\r\n  \"Name\": \"Chiara\",\r\n  \"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n  \"Email\": \"c.bernardini@sintraconsulting.eu\"\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}user/save",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditUser",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"UserId\": 3,\r\n  \"Name\": \"Marco\",\r\n  \"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n  \"Email\": \"m.guidotto@sintraconsulting.eu\",\r\n  \"Id\": 2\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}user/edit/2",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "edit",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteUser",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}user/delete/2",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "delete",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteUserByEntity",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"UserId\": 4,\r\n\t\"Name\": \"Chiara\",\r\n\t\"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n\t\"Email\": \"c.bernardini@sintraconsulting.eu\",\r\n\t\"CreatedOn\": \"2019-06-11T09:46:50.45\",\r\n\t\"ModifiedOn\": \"2019-06-11T09:46:50.45\",\r\n\t\"DeletedOn\": \"1753-01-01T00:00:00\",\r\n\t\"CreatedBy\": null,\r\n\t\"ModifiedBy\": null,\r\n\t\"DeletedBy\": null,\r\n\t\"Active\": true,\r\n\t\"Id\": 3\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}user/delete",
+              "host": [
+                "{{url}}user"
+              ],
+              "path": [
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Order_Detail",
+      "item": [
+        {
+          "name": "GetOrderDetailById",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}order_detail/1",
+              "host": [
+                "{{url}}order_detail"
+              ],
+              "path": [
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetOrdersDetailList",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}order_detail/order_detail-list",
+              "host": [
+                "{{url}}order_detail"
+              ],
+              "path": [
+                "order_detail-list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "SaveOrderDetail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"OrderId\": 42,\r\n  \"ProductId\": 1002,\r\n  \"Quantity\": 21\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}order_detail/save",
+              "host": [
+                "{{url}}order_detail"
+              ],
+              "path": [
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditOrderDetail",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"OrderId\": 42,\r\n  \"ProductId\": 2,\r\n  \"Quantity\": 71,\r\n  \"Id\": 2\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}order_detail/edit/2",
+              "host": [
+                "{{url}}order_detail"
+              ],
+              "path": [
+                "edit",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteOrderDetail",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}order_detail/delete/2",
+              "host": [
+                "{{url}}order_detail"
+              ],
+              "path": [
+                "delete",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteOrderDetailByEntity",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\t\"OrderId\": 40,\r\n\t\"ProductId\": 1,\r\n\t\"Quantity\": 5,\r\n\t\"CreatedOn\": \"2019-06-11T10:24:32.97\",\r\n\t\"ModifiedOn\": \"2019-06-11T10:24:32.97\",\r\n\t\"DeletedOn\": \"1753-01-01T00:00:00\",\r\n\t\"CreatedBy\": null,\r\n\t\"ModifiedBy\": null,\r\n\t\"DeletedBy\": null,\r\n\t\"Active\": true,\r\n\t\"Id\": 1\r\n}"
+            },
+            "url": {
+              "raw": "{{url}}order_detail/delete",
+              "host": [
+                "{{url}}order_detail"
+              ],
+              "path": [
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

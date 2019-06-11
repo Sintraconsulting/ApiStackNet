@@ -58,7 +58,7 @@ namespace ApiStackNet.Demo.Controllers.Api
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("edit/{id}")]
         public WrappedResponse<UserDTO> EditUser(UserBO user)
         {
             return WrappedOK(this.UserService.EditUser(user));

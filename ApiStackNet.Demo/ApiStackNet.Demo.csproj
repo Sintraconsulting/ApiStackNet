@@ -243,6 +243,10 @@
     <Compile Include="Migrations\201906071423368_DbEntityChanges.Designer.cs">
       <DependentUpon>201906071423368_DbEntityChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906110755191_updateOrderDetailAsAuditable.cs" />
+    <Compile Include="Migrations\201906110755191_updateOrderDetailAsAuditable.Designer.cs">
+      <DependentUpon>201906110755191_updateOrderDetailAsAuditable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -280,6 +284,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ApiStackNet.Demo.nuspec" />
+    <Content Include="Postman\ApiStackDemo.postman_collection.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -354,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906071423368_DbEntityChanges.resx">
       <DependentUpon>201906071423368_DbEntityChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906110755191_updateOrderDetailAsAuditable.resx">
+      <DependentUpon>201906110755191_updateOrderDetailAsAuditable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
