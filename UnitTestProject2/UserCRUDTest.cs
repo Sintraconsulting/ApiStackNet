@@ -38,6 +38,7 @@ namespace ApiStackNetDemoTest
             UserDTO UserDTO = UserService.SaveUser(userBO);
 
             //New BO
+            userBO.Id = UserDTO.Id;
             userBO.Name = "Chiara Bernardini";
             userBO.Email = "c.bernardini@sintraconsulting.eu";
             //EDIT         
