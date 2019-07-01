@@ -30,7 +30,7 @@ namespace ApiStackNet.Demo.BLL.Services
             return orderDetailDTO;
         }
 
-        public List<OrderDetailDTO> GetProductsList()
+        public List<OrderDetailDTO> GetOrderDetailList()
         {
             List<OrderDetailDTO> ordersDetailList = new List<OrderDetailDTO>();
 

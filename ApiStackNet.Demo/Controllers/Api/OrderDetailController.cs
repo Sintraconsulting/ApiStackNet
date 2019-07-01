@@ -33,7 +33,7 @@ namespace ApiStackNet.Demo.Controllers.Api
         [Route("order_detail-list")]
         public WrappedResponse<List<OrderDetailDTO>> GetOrdersDetailList()
         {
-            return WrappedOK(this.OrderDetailService.GetProductsList());
+            return WrappedOK(this.OrderDetailService.GetOrderDetailList());
         }
 
         [HttpPost]
