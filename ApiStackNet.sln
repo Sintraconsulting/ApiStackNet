@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStackNet.Demo", "ApiStac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStackNetTest", "ApiStackNetTest\ApiStackNetTest.csproj", "{FB27A94A-9A16-4DD3-9E59-E17E201D598C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStackNetDemoTest", "UnitTestProject2\ApiStackNetDemoTest.csproj", "{0848B53A-C715-4FC1-A85F-F7281BF49AE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiStackNet.Demo.Test", "ApiStackNet.Demo.Test\ApiStackNet.Demo.Test.csproj", "{E8C70DFD-A060-430A-8F84-F334E1D84B32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{FB27A94A-9A16-4DD3-9E59-E17E201D598C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB27A94A-9A16-4DD3-9E59-E17E201D598C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB27A94A-9A16-4DD3-9E59-E17E201D598C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0848B53A-C715-4FC1-A85F-F7281BF49AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0848B53A-C715-4FC1-A85F-F7281BF49AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0848B53A-C715-4FC1-A85F-F7281BF49AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0848B53A-C715-4FC1-A85F-F7281BF49AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8C70DFD-A060-430A-8F84-F334E1D84B32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8C70DFD-A060-430A-8F84-F334E1D84B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8C70DFD-A060-430A-8F84-F334E1D84B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8C70DFD-A060-430A-8F84-F334E1D84B32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

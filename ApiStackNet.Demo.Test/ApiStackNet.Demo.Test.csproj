@@ -8,11 +8,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0848B53A-C715-4FC1-A85F-F7281BF49AE8}</ProjectGuid>
+    <ProjectGuid>{E8C70DFD-A060-430A-8F84-F334E1D84B32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTestProject2</RootNamespace>
-    <AssemblyName>UnitTestProject2</AssemblyName>
+    <RootNamespace>ApiStackNet.Demo.Test</RootNamespace>
+    <AssemblyName>ApiStackNet.Demo.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -129,8 +129,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="CRUD\OrderCRUDTest.cs" />
+    <Compile Include="CRUD\OrderDetailCRUDTest.cs" />
+    <Compile Include="CRUD\ProductCRUDTest.cs" />
+    <Compile Include="CRUD\UserCRUDTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserCRUDTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

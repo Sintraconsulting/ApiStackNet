@@ -6,11 +6,10 @@ using ApiStackNet.Demo.BO;
 using ApiStackNet.Demo.BLL.Services;
 using ApiStackNet.Demo.DTO;
 using System.Collections.Generic;
-using ApiStackNetXUnitTest;
 using System.Linq;
 using System.Web.Http;
 
-namespace ApiStackNetDemoTest
+namespace ApiStackNet.Demo.Test.CRUD
 {
     public class ProductCRUDTest : BaseTest
     {

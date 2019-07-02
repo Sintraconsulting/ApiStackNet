@@ -14,7 +14,7 @@ using System.Data.Entity;
 using AutoMapper;
 using ApiStackNet.Demo.BLL.Services;
 
-namespace ApiStackNetXUnitTest
+namespace ApiStackNet.Demo.Test
 {
     public class BaseTest
     {
