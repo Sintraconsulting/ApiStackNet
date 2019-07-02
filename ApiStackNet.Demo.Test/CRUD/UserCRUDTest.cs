@@ -34,6 +34,16 @@ namespace ApiStackNet.Demo.Test.CRUD
 
             //SAVE
             UserDTO UserDTO = UserService.SaveUser(userBO);
+            
+            User UserToCheck = DbContext.User.Where(x => x.Id == UserDTO.Id && x.Active == true).FirstOrDefault();
+            var date = DateTime.Now;
+            //Check object's fields on SAVE
+            Assert.True(UserToCheck.UserId == UserDTO.UserId);
+            Assert.True(UserToCheck.Name == UserDTO.Name);
+            Assert.True(UserToCheck.Address == UserDTO.Address);
+            Assert.True(UserToCheck.Email == UserDTO.Email);         
+            Assert.True(UserToCheck.CreatedOn.Date == date.Date);
+            Assert.True(UserToCheck.ModifiedOn.Date == date.Date);
 
             //New BO
             userBO.Id = UserDTO.Id;
@@ -42,8 +52,21 @@ namespace ApiStackNet.Demo.Test.CRUD
             //EDIT         
             UserService.EditUser(userBO);
 
+            UserToCheck = DbContext.User.Where(x => x.Id == userBO.Id && x.Active == true).FirstOrDefault();
+            //Check object's fields on EDIT
+            Assert.True(UserToCheck.UserId == userBO.UserId);
+            Assert.True(UserToCheck.Name == userBO.Name);
+            Assert.True(UserToCheck.Address == userBO.Address);
+            Assert.True(UserToCheck.Email == userBO.Email);
+            Assert.True(UserToCheck.CreatedOn == UserDTO.CreatedOn);
+            Assert.True(UserToCheck.ModifiedOn > UserDTO.ModifiedOn);
+
             //DELETE by Id
             UserService.Delete(UserDTO.Id);
+
+            UserToCheck = DbContext.User.Where(x => x.Id == UserDTO.Id && x.Active == false).FirstOrDefault();
+            //Check if entity is not null
+            Assert.True(UserToCheck != null);
 
             //Restore "Old BO" and save the Entity
             userBO = UserBOCreate();
@@ -52,11 +75,33 @@ namespace ApiStackNet.Demo.Test.CRUD
             //GET BY ID
             UserDTO = UserService.GetById(UserDTO.Id);
 
+            UserToCheck = DbContext.User.Where(x => x.Id == UserDTO.Id && x.Active == true).FirstOrDefault();
+            //Check object's fields on GET BY ID
+            Assert.True(UserDTO.Id == UserToCheck.Id);
+            Assert.True(UserDTO.UserId == UserToCheck.UserId);
+            Assert.True(UserDTO.Name == UserToCheck.Name);
+            Assert.True(UserDTO.Address == UserToCheck.Address);
+            Assert.True(UserDTO.Email == UserToCheck.Email);
+            Assert.True(UserDTO.CreatedOn == UserToCheck.CreatedOn);
+            Assert.True(UserDTO.ModifiedOn == UserToCheck.ModifiedOn);
+            Assert.True(UserDTO.DeletedOn == UserToCheck.DeletedOn);
+            Assert.True(UserDTO.CreatedBy == UserToCheck.CreatedBy);
+            Assert.True(UserDTO.ModifiedBy == UserToCheck.ModifiedBy);
+            Assert.True(UserDTO.DeletedBy == UserToCheck.DeletedBy);
+
             //DELETE by Entity
             UserService.Delete(UserDTO);
 
+            UserToCheck = DbContext.User.Where(x => x.Id == UserDTO.Id && x.Active == false).FirstOrDefault();
+            //Check if entity is not null
+            Assert.True(UserToCheck != null);
+
             //LIST
             var list = UserService.GetUsersList();
+
+            var listToCheck = DbContext.User.Where(x => x.Active == true);
+            //Check on list of entities returned by the method
+            Assert.True(list.Count() == listToCheck.Count());
         }
     }
 }
