@@ -17,8 +17,8 @@ namespace ApiStackNet.Demo.Test.CRUD
         {
             OrderBO order = new OrderBO()
             {
-                OrderId = 230,
-                UserId = 4,
+                OrderId = 230, //to check
+                UserId = 4, //to check
                 Data = DateTime.Now,
                 Amount = 4
             };
