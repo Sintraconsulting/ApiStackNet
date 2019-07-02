@@ -18,9 +18,9 @@ namespace ApiStackNet.Demo.Test.CRUD
             UserBO user = new UserBO()
             {
                 UserId = 23,
-                Name = "Riccardo Tinì",
-                Address = "Via Fratelli Lumiere, 19, 52100 Arezzo AR",
-                Email = "r.tini@sintraconsulting.eu"
+                Name = "Mario Rossi",
+                Address = "Via Arezzo, 32",
+                Email = "m.rossi@email.com"
             };
 
             return user;
@@ -37,8 +37,8 @@ namespace ApiStackNet.Demo.Test.CRUD
 
             //New BO
             userBO.Id = UserDTO.Id;
-            userBO.Name = "Chiara Bernardini";
-            userBO.Email = "c.bernardini@sintraconsulting.eu";
+            userBO.Name = "Tizio Caio";
+            userBO.Email = "t.caio@email.com";
             //EDIT         
             UserService.EditUser(userBO);
 
