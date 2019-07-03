@@ -38,6 +38,7 @@ namespace ApiStackNet.Demo.Test.CRUD
             User UserToCheck = DbContext.User.Where(x => x.Id == UserDTO.Id && x.Active == true).FirstOrDefault();
             var date = DateTime.Now;
             //Check object's fields on SAVE
+            Assert.True(UserToCheck.Id == UserDTO.Id);
             Assert.True(UserToCheck.UserId == UserDTO.UserId);
             Assert.True(UserToCheck.Name == UserDTO.Name);
             Assert.True(UserToCheck.Address == UserDTO.Address);
@@ -54,12 +55,17 @@ namespace ApiStackNet.Demo.Test.CRUD
 
             UserToCheck = DbContext.User.Where(x => x.Id == userBO.Id && x.Active == true).FirstOrDefault();
             //Check object's fields on EDIT
+            Assert.True(UserToCheck.Id == userBO.Id);
             Assert.True(UserToCheck.UserId == userBO.UserId);
             Assert.True(UserToCheck.Name == userBO.Name);
             Assert.True(UserToCheck.Address == userBO.Address);
             Assert.True(UserToCheck.Email == userBO.Email);
             Assert.True(UserToCheck.CreatedOn == UserDTO.CreatedOn);
             Assert.True(UserToCheck.ModifiedOn > UserDTO.ModifiedOn);
+            Assert.True(UserToCheck.DeletedOn == UserDTO.DeletedOn);
+            Assert.True(UserToCheck.CreatedBy == UserDTO.CreatedBy);
+            //Assert.True(UserToCheck.ModifiedBy == UserDTO.ModifiedBy); who modifies the entity is not always the same who created it
+            Assert.True(UserToCheck.DeletedBy == UserDTO.DeletedBy);
 
             //DELETE by Id
             UserService.Delete(UserDTO.Id);
@@ -67,6 +73,8 @@ namespace ApiStackNet.Demo.Test.CRUD
             UserToCheck = DbContext.User.Where(x => x.Id == UserDTO.Id && x.Active == false).FirstOrDefault();
             //Check if entity is not null
             Assert.True(UserToCheck != null);
+            //Check if the deleted date is modified on DELETE
+            Assert.True(UserToCheck.DeletedOn > UserDTO.DeletedOn);
 
             //Restore "Old BO" and save the Entity
             userBO = UserBOCreate();
@@ -95,6 +103,8 @@ namespace ApiStackNet.Demo.Test.CRUD
             UserToCheck = DbContext.User.Where(x => x.Id == UserDTO.Id && x.Active == false).FirstOrDefault();
             //Check if entity is not null
             Assert.True(UserToCheck != null);
+            //Check if the deleted date is modified on DELETE
+            Assert.True(UserToCheck.DeletedOn > UserDTO.DeletedOn);
 
             //LIST
             var list = UserService.GetUsersList();
