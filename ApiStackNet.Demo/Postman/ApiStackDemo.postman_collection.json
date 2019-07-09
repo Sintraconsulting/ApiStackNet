@@ -347,7 +347,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"UserId\": 4,\r\n  \"Name\": \"Chiara\",\r\n  \"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n  \"Email\": \"c.bernardini@sintraconsulting.eu\"\r\n}"
+              "raw": "{\r\n  \"UserId\": 4,\r\n  \"Name\": \"Chiara\",\r\n  \"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n  \"Email\": \"noreply@test.eu\"\r\n}"
             },
             "url": {
               "raw": "{{url}}user/save",
@@ -375,7 +375,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"UserId\": 3,\r\n  \"Name\": \"Marco\",\r\n  \"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n  \"Email\": \"m.guidotto@sintraconsulting.eu\",\r\n  \"Id\": 2\r\n}"
+              "raw": "{\r\n  \"UserId\": 3,\r\n  \"Name\": \"Marco\",\r\n  \"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n  \"Email\": \"noreplay@test.eu\",\r\n  \"Id\": 2\r\n}"
             },
             "url": {
               "raw": "{{url}}user/edit/2",
@@ -422,7 +422,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n\t\"UserId\": 4,\r\n\t\"Name\": \"Chiara\",\r\n\t\"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n\t\"Email\": \"c.bernardini@sintraconsulting.eu\",\r\n\t\"CreatedOn\": \"2019-06-11T09:46:50.45\",\r\n\t\"ModifiedOn\": \"2019-06-11T09:46:50.45\",\r\n\t\"DeletedOn\": \"1753-01-01T00:00:00\",\r\n\t\"CreatedBy\": null,\r\n\t\"ModifiedBy\": null,\r\n\t\"DeletedBy\": null,\r\n\t\"Active\": true,\r\n\t\"Id\": 3\r\n}"
+              "raw": "{\r\n\t\"UserId\": 4,\r\n\t\"Name\": \"Chiara\",\r\n\t\"Address\": \"Via Fratelli Lumiere, 19, 52100 Arezzo AR\",\r\n\t\"Email\": \"norepy@test.eu\",\r\n\t\"CreatedOn\": \"2019-06-11T09:46:50.45\",\r\n\t\"ModifiedOn\": \"2019-06-11T09:46:50.45\",\r\n\t\"DeletedOn\": \"1753-01-01T00:00:00\",\r\n\t\"CreatedBy\": null,\r\n\t\"ModifiedBy\": null,\r\n\t\"DeletedBy\": null,\r\n\t\"Active\": true,\r\n\t\"Id\": 3\r\n}"
             },
             "url": {
               "raw": "{{url}}user/delete",
