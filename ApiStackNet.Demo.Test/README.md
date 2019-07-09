@@ -18,8 +18,8 @@ If there's no data to fulfill the FK parameters, before proceding with tests pop
 
 Through the test code there's a comment "to check" beside the points where a check for the data is needed before proceeding.
 
+The tests on "List" method are only in "UserCRUDTest.cs".
+
 
 # Infos
 The current test ambient refers to the "ApiStackNet.Demo" Project. 
-The current dependencies and NuGet packages are alligned with the "ApiStackNetTest" Project.
-
