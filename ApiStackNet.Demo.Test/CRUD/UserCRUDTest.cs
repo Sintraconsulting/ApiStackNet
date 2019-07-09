@@ -136,24 +136,24 @@ namespace ApiStackNet.Demo.Test.CRUD
             IList<OrderInfo<User>> orderbyList = new List<OrderInfo<User>>();
             OrderInfo<User> orderInfo = new OrderInfo<User>(x => x.UserId, OrderByDirection.ASC);
             orderbyList.Add(orderInfo);
-            OrderInfo<User> orderInfo2 = new OrderInfo<User>(x => x.Name, OrderByDirection.ASC);
+            OrderInfo<User> orderInfo2 = new OrderInfo<User>(x => x.Id, OrderByDirection.ASC);
             orderbyList.Add(orderInfo2);
 
             //Restore "Old BO" and save the Entity
             userBO = UserBOCreate();
-            userBO.UserId = 24;
+            userBO.UserId = 31;
             UserDTO = UserService.SaveUser(userBO);
 
             date = DateTime.Now.Date;
 
             //Test List(4 args)
             PagedList<UserDTO> pagedList = UserService.List(x => x.CreatedOn < date, 0, 2, orderbyList);
-            var queriedList = DbContext.User.Where(x => x.CreatedOn < date && x.Active == true).OrderBy(x => x.Name).OrderBy(x => x.UserId).ToList();
-            PagedList<User> pagedListToCheck = new PagedList<User>(queriedList, 0, 2, queriedList.Count());
+            var queriedList = DbContext.User.Where(x => x.CreatedOn < date && x.Active == true).OrderBy(x => x.Id).OrderBy(x => x.UserId).ToList();
+            PagedList<User> pagedListToCheck = new PagedList<User>(queriedList.Take(2).ToList(), 0, 2, queriedList.Count());
             listToCheck = pagedListToCheck.Items.ToList();
             var listFromSw = pagedList.Items.ToList();
             i = 0;
-            iterator = queriedList.Count();
+            iterator = pagedListToCheck.Items.Count();
             while (i < iterator)
             {
                 Assert.True(listToCheck[i].Id == listFromSw[i].Id);
@@ -179,11 +179,11 @@ namespace ApiStackNet.Demo.Test.CRUD
             //Test List(3 args)
             pagedList = UserService.List(x => x.CreatedOn < date, 0, 2);
             queriedList = DbContext.User.Where(x => x.CreatedOn < date && x.Active == true).OrderBy(x => x.Id).ToList();
-            pagedListToCheck = new PagedList<User>(queriedList, 0, 2, queriedList.Count());
+            pagedListToCheck = new PagedList<User>(queriedList.Take(2).ToList(), 0, 2, queriedList.Count());
             listToCheck = pagedListToCheck.Items.ToList();
             listFromSw = pagedList.Items.ToList();
             i = 0;
-            iterator = queriedList.Count();
+            iterator = pagedListToCheck.Items.Count();
             while (i < iterator)
             {
                 Assert.True(listToCheck[i].Id == listFromSw[i].Id);
@@ -209,7 +209,7 @@ namespace ApiStackNet.Demo.Test.CRUD
             //Test List(2 args)
             pagedList = UserService.List(0, 3);
             queriedList = DbContext.User.Where(x => x.Active == true).OrderBy(x => x.Id).ToList();
-            pagedListToCheck = new PagedList<User>(queriedList, 0, 3, queriedList.Count());
+            pagedListToCheck = new PagedList<User>(queriedList.Take(3).ToList(), 0, 3, queriedList.Count());
             listToCheck = pagedListToCheck.Items.Take(3).ToList();
             listFromSw = pagedList.Items.ToList();
             i = 0;
