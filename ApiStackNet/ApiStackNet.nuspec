@@ -2,7 +2,7 @@
 <package >
     <metadata>
     <id>ApiStackNet</id>
-    <version>1.0.0</version>
+    <version>$version$</version>
     <title>ApiStackNet</title>
     <authors>Sintra Consulting</authors>
     <owners></owners>
