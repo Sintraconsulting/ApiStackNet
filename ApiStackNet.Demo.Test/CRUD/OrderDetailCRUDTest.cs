@@ -13,6 +13,7 @@ namespace ApiStackNet.Demo.Test.CRUD
 {
     public class OrderDetailCRUDTest : BaseTest
     {
+
         private OrderDetailBO OrderDetailBOCreate()
         {
             OrderDetailBO orderDetail = new OrderDetailBO()
