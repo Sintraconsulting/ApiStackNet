@@ -1,12 +1,23 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+ApiStackNet is a non-invasive api accellerator. Compared to other frameworks it doesn't exclude the possibility to create vanilla code. It's purpose is to:
+
+- avoid redundand code, 
+- give a solid stack to all developers,
+- keep a clean architecture.
+
+What is included out of the box:
+
+- three level architecture scaffold ( DAL, BLL, API)
+- swagger support
+- entity framework 6 support (database first or code first)
+- service pattern scaffold
+
+With ApiStackNet you can scaffold a rest web service just writing the only part where you bring value. So, you just need to define data model and mapping it to the business model to get all working!
+
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+
+TODO: tutorial here (add nuget step)
 
 # Build and Test
 TEST Postman:
@@ -19,9 +30,9 @@ The following tips refer to those test that need an "hand configuration" before 
 - DeleteByEntity: just send the request to run the test, using the json in the body.
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+Any contribution is welcome, open an issue to start.
+
+# License
+
+ApiStackNet is released under LGPL License.
