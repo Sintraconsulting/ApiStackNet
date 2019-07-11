@@ -1,4 +1,6 @@
-# Introduction 
+# Api Stack Net: the api accellerator
+[![Build status](https://ci.appveyor.com/api/projects/status/g3yoa32469vf11f9/branch/master?svg=true)](https://ci.appveyor.com/project/zeppaman/apistacknet/branch/master)  [![nuget](https://img.shields.io/badge/nuget-download-blue.svg)](https://www.nuget.org/packages/ApiStackNet/)
+
 ApiStackNet is a non-invasive api accellerator. Compared to other frameworks it doesn't exclude the possibility to create vanilla code. It's purpose is to:
 
 - avoid redundand code, 
