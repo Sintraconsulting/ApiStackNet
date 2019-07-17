@@ -7,7 +7,20 @@
     <authors>Sintra Consulting</authors>
     <owners></owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Awesome aspi stack framework for asp.net</description>
+    <description>Awesome spi stack framework for asp.net. ApiStackNet is a non-invasive api accellerator. Compared to other frameworks it doesn't exclude the possibility to create vanilla code. It's purpose is to:
+
+- avoid redundand code,
+- give a solid stack to all developers,
+- keep a clean architecture.
+
+What is included out of the box:
+
+- three level architecture scaffold ( DAL, BLL, API)
+- swagger support
+- entity framework 6 support (database first or code first)
+- service pattern scaffold
+
+With ApiStackNet you can scaffold a rest web service just writing the only part where you bring value. So, you just need to define data model and mapping it to the business model to get all working!</description>
     <releaseNotes>First release</releaseNotes>
     <copyright>Copyright 2019 (c) Sintra Consulting. </copyright>
     <tags>api</tags>
